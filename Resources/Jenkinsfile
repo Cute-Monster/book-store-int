@@ -4,8 +4,8 @@ pipeline {
     }
 
     environment {
-        CR_GITLAB_TOKEN = credentials('cruntov_gitlab_st'),
-        Docker_Registry = "https://315727832121.dkr.ecr.us-east-1.amazonaws.com",
+        CR_GITLAB_TOKEN = credentials('cruntov_gitlab_st')
+        Docker_Registry = "https://315727832121.dkr.ecr.us-east-1.amazonaws.com"
         Docker_Repository = "maven-cruntov"
         Docker_Creds = "AWS_ECR_CR"
 
