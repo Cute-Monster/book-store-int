@@ -16,7 +16,7 @@ pipeline {
             steps{
                 script{
                     docker.withRegistry("https://${Docker_Registry}", "${Docker_Creds}"){
-                        dockerImage = docker.build("${Docker_Registry}/${Docker_Repository}:${BUILD_NUMBER} " + '-f ${Dockerfile_Path}')
+                        dockerImage = docker.build("${Docker_Registry}/${Docker_Repository}:${BUILD_NUMBER}")
                         dockerImage.push('${BUILD_NUMBER}')
 //                         sh('docker build -t ${Docker_Registry}/${Docker_Repository}:$BUILD_NUMBER -f Resources/Dockerfile .')
 //                         sh('docker push 315727832121.dkr.ecr.us-east-1.amazonaws.com/maven-cruntov:latest')
