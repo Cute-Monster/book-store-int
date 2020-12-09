@@ -10,7 +10,7 @@ pipeline {
         stage('Git Checkout'){
             steps{
                 script{
-                    docker.withServer('https://315727832121.dkr.ecr.us-east-1.amazonaws.com', 'AWS_ECR_CR'){
+                    docker.withRegistry('https://315727832121.dkr.ecr.us-east-1.amazonaws.com', 'AWS_ECR_CR'){
                         sh('docker build -t 315727832121.dkr.ecr.us-east-1.amazonaws.com/maven-cruntov:latest -f Resources/Dockerfile .')
                         sh('docker push 315727832121.dkr.ecr.us-east-1.amazonaws.com/maven-cruntov')
                     }
