@@ -8,7 +8,7 @@ pipeline {
         Aws_Region = 'us-east-1'
         Docker_Registry = '315727832121.dkr.ecr.us-east-1.amazonaws.com'
         Docker_Repository = 'maven-cruntov'
-        Docker_Creds = 'CR_AWS_ECR_TEST'//'AWS_ECR_CR'
+        Docker_Creds = 'CR_AWS_ECR_TEST'
         Dockerfile_Path = 'Resources/Dockerfile'
 
     }
