@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage('Git Checkout'){
             steps{
-                echo("Hello There")
+                sh('docker build -t 315727832121.dkr.ecr.us-east-1.amazonaws.com/maven-cruntov:latest -f Resources/Dockerfile .')
+                sh('docker push 315727832121.dkr.ecr.us-east-1.amazonaws.com/maven-cruntov')
             }
         }
     }
