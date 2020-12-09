@@ -15,7 +15,7 @@ pipeline {
         stage('Creating Docker Imgae'){
             steps{
                 script{
-                    docker.withRegistry("https://${Docker_Registry}", "ecr:${Docker_Creds}"){
+                    docker.withRegistry("https://${Docker_Registry}", "${Docker_Creds}"){
                         dockerImage = docker.build("${Docker_Registry}/${Docker_Repository}:${BUILD_NUMBER}", "-f ${Dockerfile_Path}" + " .")
                         dockerImage.push('${BUILD_NUMBER}')
 //                         sh('docker build -t ${Docker_Registry}/${Docker_Repository}:$BUILD_NUMBER -f Resources/Dockerfile .')
