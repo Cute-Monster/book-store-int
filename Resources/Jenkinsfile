@@ -5,18 +5,18 @@ pipeline {
 
     environment {
         CR_GITLAB_TOKEN = credentials('cruntov_gitlab_st')
-        Docker_Registry = "https://315727832121.dkr.ecr.us-east-1.amazonaws.com"
-        Docker_Repository = "maven-cruntov"
-        Docker_Creds = "AWS_ECR_CR"
+        Docker_Registry = 'https://315727832121.dkr.ecr.us-east-1.amazonaws.com'
+        Docker_Repository = 'maven-cruntov'
+        Docker_Creds = 'AWS_ECR_CR'
 
     }
     stages {
         stage('Creating Docker Imgae'){
             steps{
                 script{
-                    docker.withRegistry("${Docker_Registry}", "${AWS_ECR_CR}"){
-                        dockerImage = docker.build("${Docker_Registry}/${Docker_Repository}:${BUILD_NUMBER}" + "-f Resources/Dockerfile" + ".")
-                        dockerImage.push("${BUILD_NUMBER}")
+                    docker.withRegistry('${Docker_Registry}', '${AWS_ECR_CR}'){
+                        dockerImage = docker.build('${Docker_Registry}/${Docker_Repository}:${BUILD_NUMBER}' + '-f Resources/Dockerfile' + '.')
+                        dockerImage.push('${BUILD_NUMBER}')
 //                         sh('docker build -t ${Docker_Registry}/${Docker_Repository}:$BUILD_NUMBER -f Resources/Dockerfile .')
 //                         sh('docker push 315727832121.dkr.ecr.us-east-1.amazonaws.com/maven-cruntov:latest')
                     }
