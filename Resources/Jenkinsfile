@@ -4,27 +4,13 @@ pipeline {
     }
 
     environment {
-
-        CR_GITLAB_TOKEN = credentials('cruntov_gitlab_token')
+        CR_GITLAB_TOKEN = credentials('cruntov_gitlab_st')
     }
     stages {
         stage('Git Checkout'){
             steps{
-                withCredentials([string:(credentialsId:'cruntov_gitlab_token', variable: 'token')]){
-                    echo("${token}")
-//                 git url: 'https://constantin.runtov:${GITLAB_TOKEN}@gitlab.trydevops.com/constantin.runtov/maven-pet-clinic.git' branch: 'master'
-                }
+                echo("Hello There")
             }
         }
-//         stage('Create app image') {
-//             steps {
-//
-//                 git 'https://constantin.runtov:${GITLAB_TOKEN}@gitlab.trydevops.com/constantin.runtov/maven-pet-clinic.git'
-//                     script {
-//                         AppImage = docker.build("test-image", "./")
-//                     }
-//
-//             }
-//         }
     }
 }
