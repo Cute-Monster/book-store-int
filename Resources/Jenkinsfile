@@ -36,7 +36,7 @@ pipeline {
         stage('Docker Image removing'){
             steps{
                 script{
-                    sh('docker rmi ${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER} --force')
+//                     sh('docker rmi ${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER} --force')
                     sh('docker image prune --filter label=stage=build --force')
                 }
             }
