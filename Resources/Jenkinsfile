@@ -36,7 +36,7 @@ pipeline {
         stages('Docker Image removing'){
             steps{
                 script{
-                    dockerImage.remove('${BUILD_NUMBER}')
+                    dockerImage.prune('${BUILD_NUMBER}')
                 }
             }
         }
