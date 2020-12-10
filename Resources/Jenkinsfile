@@ -25,7 +25,7 @@ pipeline {
 //                     test_docker.build_image()
                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
                         dockerImage = docker.build("${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER}", "-f ${Dockerfile_Path}" + " .")
-//                     }
+                    }
                 }
             }
         }
