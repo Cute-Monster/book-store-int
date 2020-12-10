@@ -36,7 +36,7 @@ pipeline {
         stage('Docker Image removing'){
             steps{
                 script{
-                    dockerImage.delete('${BUILD_NUMBER}')
+                    dockerImage.rmi('${BUILD_NUMBER}')
                 }
             }
         }
