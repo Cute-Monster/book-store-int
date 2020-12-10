@@ -29,6 +29,13 @@ pipeline {
                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
                         dockerImage.push('${BUILD_NUMBER}')
                     }
+
+                }
+            }
+        }
+        stages('Docker Image removing'){
+            steps{
+                script{
                     dockerImage.remove('${BUILD_NUMBER}')
                 }
             }
