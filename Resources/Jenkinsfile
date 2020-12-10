@@ -1,3 +1,5 @@
+@Library('cr_shared_library') import org.cruntov.Kubernetes_Cluster
+def cluster = new Kubernetes_Cluster(this)
 pipeline {
     agent {
         label 'Slave'
@@ -37,7 +39,14 @@ pipeline {
             steps{
                 script{
                     sh('docker rmi ${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER} --force')
-                    sh('docker image prune --filter label=stage=build --force')
+                }
+            }
+        }
+
+        stage('Testing Shared'){
+            steps{
+                script{
+                    cluster.terraform()
                 }
             }
         }
