@@ -1,7 +1,7 @@
 @Library('cr_shared_library@master')
 
-import vars.Terraform.*
-terraform test = new terraform()
+import org.cruntov.jenkins.components.Kubernetes_Cluster
+def cluster = new Kubernetes_Cluster(steps)
 
 pipeline {
     agent {
@@ -46,11 +46,19 @@ pipeline {
             }
         }
 
+//         stage('Kuber Deploy'){
+//             steps{
+//                 script{
+//                     cl
+//                 }
+//             }
+//         }
+
         stage('Testing Shared'){
             steps{
-
-                    terraform()
-
+                script{
+                    cluster.terraform()
+                }
             }
         }
 //         when(
