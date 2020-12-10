@@ -1,5 +1,6 @@
-@Library('cr_shared_library@master') import Kubernetes_Cluster
+@Library('cr_shared_library@master') _
 def cluster = new Kubernetes_Cluster(this)
+
 pipeline {
     agent {
         label 'Slave'
