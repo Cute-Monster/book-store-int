@@ -12,10 +12,20 @@ pipeline {
         Dockerfile_Path = 'Resources/Dockerfile'
 
     }
+    def Workspace_Cleaning(){
+        echo("""
+            Cleaning Workspace now
+        """)
+        cleanWS()
+        echo("""
+             Workspace Cleaned
+        """)
+    }
     stages {
         stage('Creating Docker Imgae'){
             steps{
                 script{
+                    Workspace_Cleaning()
                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
                         dockerImage = docker.build("${Docker_Registry}/${Docker_Repository}:${BUILD_NUMBER}", "-f ${Dockerfile_Path}" + " .")
                     }
@@ -29,8 +39,22 @@ pipeline {
                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
                         dockerImage.push('${BUILD_NUMBER}')
                     }
+                    dockerImage.remove('${BUILD_NUMBER}')
                 }
             }
         }
+//         when(
+//             branch 'master'
+//         ){
+//             stage('Creating Cluster'){
+//                 steps{
+//
+//                 }
+//
+//             }
+//         }
+    }
+    post{
+        Workspace_Cleaning()
     }
 }
