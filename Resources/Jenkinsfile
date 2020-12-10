@@ -1,4 +1,4 @@
-@Library('cr_shared_library') import org.cruntov.Kubernetes_Cluster
+@Library('cr_shared_library@master') _ import Kubernetes_Cluster
 def cluster = new Kubernetes_Cluster(this)
 pipeline {
     agent {
