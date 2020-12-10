@@ -47,9 +47,9 @@ pipeline {
 
         stage('Testing Shared'){
             steps{
-                script{
+                
                     terraform()
-                }
+
             }
         }
 //         when(
