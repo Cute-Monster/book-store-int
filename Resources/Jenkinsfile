@@ -13,10 +13,9 @@ pipeline {
     }
 
     stages {
-        stage('Creating Docker Imgae'){
+        stage('Creating Docker Image'){
             steps{
                 script{
-                    Workspace_Cleaning()
                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
                         dockerImage = docker.build("${Docker_Registry}/${Docker_Repository}:${BUILD_NUMBER}", "-f ${Dockerfile_Path}" + " .")
                     }
