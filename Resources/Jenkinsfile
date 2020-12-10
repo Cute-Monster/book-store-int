@@ -2,7 +2,7 @@
 
 import org.cruntov.jenkins.components.*
 def aws_cluster = new Kubernetes_Cluster(steps)
-def test_docker = new Docker_ECR(steps)
+// def test_docker = new Docker_ECR(steps)
 
 pipeline {
     agent {
@@ -22,10 +22,10 @@ pipeline {
         stage('Creating Docker Image'){
             steps{
                 script{
-                    test_docker.build_image()
-//                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
-//                         dockerImage = docker.build("${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER}", "-f ${Dockerfile_Path}" + " .")
-//                     }
+//                     test_docker.build_image()
+                    docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
+                        dockerImage = docker.build("${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER}", "-f ${Dockerfile_Path}" + " .")
+                    }
                 }
             }
         }
@@ -33,10 +33,10 @@ pipeline {
         stage('Push Image to ECR'){
             steps{
                 script{
-                    test_docker.push_to_ecr()
-//                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
-//                         dockerImage.push('${BUILD_NUMBER}')
-//                     }
+//                     test_docker.push_to_ecr()
+                    docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
+                        dockerImage.push('${BUILD_NUMBER}')
+                    }
 
                 }
             }
