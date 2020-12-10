@@ -9,6 +9,7 @@ pipeline {
         Docker_Repository = 'maven-cruntov'
         Docker_Creds = 'CR_AWS_ECR'
         Dockerfile_Path = 'Resources/Dockerfile'
+        Docker_Image_Name = '${Docker_Registry}/${Docker_Repository}'
 
     }
 
@@ -17,7 +18,7 @@ pipeline {
             steps{
                 script{
                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
-                        dockerImage = docker.build("${Docker_Registry}/${Docker_Repository}:${BUILD_NUMBER}", "-f ${Dockerfile_Path}" + " .")
+                        dockerImage = docker.build("${Docker_Image_Name}:${BUILD_NUMBER}", "-f ${Dockerfile_Path}" + " .")
                     }
                 }
             }
@@ -36,7 +37,7 @@ pipeline {
         stage('Docker Image removing'){
             steps{
                 script{
-                    dockerImage.rmi('${BUILD_NUMBER}')
+                    docker.prune('${Docker_Image_Name}:${BUILD_NUMBER}')
                 }
             }
         }
