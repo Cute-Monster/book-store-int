@@ -1,8 +1,6 @@
 @Library('cr_shared_library@master')
 
-import org.cruntov.jenkins.components.*
-def aws_cluster = new Kubernetes_Cluster(steps)
-def test_docker = new Docker_ECR(steps)
+
 
 pipeline {
     agent {
@@ -81,6 +79,9 @@ pipeline {
         }
     }
 }
+import org.cruntov.jenkins.components.*
+def aws_cluster = new Kubernetes_Cluster(steps)
+def test_docker = new Docker_ECR(steps)
 
 def Workspace_Cleaning(){
         echo("""
