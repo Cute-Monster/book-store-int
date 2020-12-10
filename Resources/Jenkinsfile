@@ -2,7 +2,6 @@
 
 import org.cruntov.jenkins.components.*
 
-def cluster = new Kubernetes_Cluster(this)
 
 pipeline {
     agent {
@@ -50,7 +49,7 @@ pipeline {
         stage('Testing Shared'){
             steps{
                 script{
-                    cluster.terraform()
+                    terraform()
                 }
             }
         }
