@@ -37,7 +37,7 @@ pipeline {
             steps{
                 script{
                     sh('docker rmi ${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER} --force')
-                    sh('docker image prune --label label=stage=build --force')
+                    sh('docker image prune --filter label=stage=build --force')
                 }
             }
         }
