@@ -4,7 +4,6 @@ pipeline {
     }
 
     environment {
-        CR_GITLAB_TOKEN = credentials('cruntov_gitlab_st')
         Aws_Region = 'us-east-1'
         Docker_Registry = '315727832121.dkr.ecr.us-east-1.amazonaws.com'
         Docker_Repository = 'maven-cruntov'
@@ -57,7 +56,7 @@ def Workspace_Cleaning(){
         echo("""
             Cleaning Workspace now
         """)
-        cleanWS()
+        cleanWs()
         echo("""
              Workspace Cleaned
         """)
