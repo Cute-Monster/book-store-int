@@ -47,7 +47,9 @@ pipeline {
 //         }
     }
     post{
-        Workspace_Cleaning()
+        always{
+            Workspace_Cleaning()
+        }
     }
 }
 
