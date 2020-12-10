@@ -9,7 +9,6 @@ pipeline {
         ECR_Repository = 'maven-cruntov'
         Docker_Creds = 'CR_AWS_ECR'
         Dockerfile_Path = 'Resources/Dockerfile'
-        Docker_Image_Name = '${Docker_Registry}/${ECR_Repository}'
 
     }
 
@@ -37,7 +36,7 @@ pipeline {
         stage('Docker Image removing'){
             steps{
                 script{
-                    docker.prune('${Docker_Image_Name}:${BUILD_NUMBER}')
+                    docker.rmi('${Docker_Image_Name}:${BUILD_NUMBER}')
                 }
             }
         }
