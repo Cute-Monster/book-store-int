@@ -1,7 +1,7 @@
 @Library('cr_shared_library@master')
 
-import Kubernetes_Cluster
-def aws_cluster = new Kubernetes_Cluster(steps)
+import org.cruntov.jenkins.components.*
+def aws_cluster = new Kubernetes_Cluster.Kubernetes_Cluster(steps)
 
 pipeline {
     agent {
