@@ -1,7 +1,7 @@
 @Library('cr_shared_library@master')
 
-import org.cruntov.jenkins.components.Kubernetes_Cluster
-def cluster = new Kubernetes_Cluster(steps)
+import Kubernetes_Cluster
+def aws_cluster = new Kubernetes_Cluster(steps)
 
 pipeline {
     agent {
@@ -57,7 +57,7 @@ pipeline {
         stage('Testing Shared'){
             steps{
                 script{
-                    cluster.terraform()
+                    aws_cluster.terraform()
                 }
             }
         }
