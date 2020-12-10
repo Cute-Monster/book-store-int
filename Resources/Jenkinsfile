@@ -1,6 +1,7 @@
 @Library('cr_shared_library@master')
 
 import vars.Terraform.*
+terraform test = new terraform()
 
 pipeline {
     agent {
@@ -47,7 +48,7 @@ pipeline {
 
         stage('Testing Shared'){
             steps{
-                
+
                     terraform()
 
             }
