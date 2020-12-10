@@ -1,5 +1,7 @@
 @Library('cr_shared_library@master')
 
+import vars.Terraform.*
+
 pipeline {
     agent {
         label 'Slave'
