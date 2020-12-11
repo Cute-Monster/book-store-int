@@ -2,7 +2,7 @@
 
 import org.cruntov.jenkins.components.*
 def aws_cluster = new Kubernetes_Cluster(steps)
-def test_docker = new Docker_ECR(steps, this)
+// def test_docker = new Docker_ECR(steps, this)
 
 pipeline {
     agent {
@@ -19,6 +19,13 @@ pipeline {
     }
 
     stages {
+        stage('Preparing'){
+            steps{
+                script{
+                    test_docker = new Docker_ECR(steps, this)
+                }
+            }
+        }
         stage('Creating Docker Image'){
             steps{
                 script{
