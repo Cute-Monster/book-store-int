@@ -14,7 +14,7 @@ pipeline {
         Docker_Registry = '315727832121.dkr.ecr.us-east-1.amazonaws.com'
         ECR_Repository = 'maven-cruntov'
         Docker_Creds = 'CR_AWS_ECR'
-        Dockerfile_Path = libraryResource 'MVN_Dockerfile'
+        Dockerfile_Path = libraryResource 'resources/'
 
     }
 
@@ -22,6 +22,9 @@ pipeline {
         stage('Preparing'){
             steps{
                 script{
+                    echo("""
+                        ${Dockerfile_Path}
+                    """)
                     test_docker = new Docker_ECR(steps, this)
                 }
             }
