@@ -53,7 +53,7 @@ pipeline {
                 script{
 //                     aws_cluster.deploy_app()
                     sh(
-                       """sed -i -e 's/image-repo:image-tag/${Docker_Registry}\/${ECR_Repository}:54/g' deployment.yml"""
+                       'sed -i -e "s/image-repo:image-tag/${Docker_Registry}\/${ECR_Repository}:54/g" deployment.yml'
                     )
                     sh("""
                         cat deployment.yml
