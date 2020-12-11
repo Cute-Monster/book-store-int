@@ -52,6 +52,9 @@ pipeline {
             steps{
                 script{
 //                     aws_cluster.deploy_app()
+                    sh(
+                       """sed -i -e 's/image-repo\\:image-tag/${Docker_Registry}\\/${ECR_Repository}\\:${GIT_COMMIT}/g' deployment.yml"""
+                    )
                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}") {
                          kubernetesDeploy(configs: "deployment.yml", kubeconfigId: 'cruntov_kuber_master_config')
                     }

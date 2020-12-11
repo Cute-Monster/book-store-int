@@ -4,11 +4,6 @@ apiVersion: apps/v1
 metadata:
   name: Test-Deployment-CR
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: Test-Deployment-CR
-      version: 54
   template:
     metadata:
       labels:
@@ -33,10 +28,9 @@ metadata:
 spec:
   selector:
     app: Test-Deployment-CR-MVN
-    version: 54
   type: NodePort
   ports:
-    - nodePort: 85
+    - nodePort: 8080
       protocol: TCP
       port: 8080
       targetPort: 8080
