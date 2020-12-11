@@ -21,7 +21,7 @@ pipeline {
             steps{
                 script{
                     test_docker = new Docker_ECR(steps, this)
-                    aws_cluster = new Kubernetes_Cluster(steps)
+                    aws_cluster = new Kubernetes_Cluster(steps, this)
                 }
             }
         }
