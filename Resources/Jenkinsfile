@@ -1,7 +1,7 @@
 @Library('cr_shared_library@master')
 
 import org.cruntov.jenkins.components.*
-def aws_cluster = new Kubernetes_Cluster(steps)
+
 
 pipeline {
     agent {
@@ -21,6 +21,7 @@ pipeline {
             steps{
                 script{
                     test_docker = new Docker_ECR(steps, this)
+                    aws_cluster = new Kubernetes_Cluster(steps)
                 }
             }
         }
@@ -43,6 +44,14 @@ pipeline {
             steps{
                 script{
                     test_docker.image_remove()
+                }
+            }
+        }
+
+        stage('Kuber Deploy'){
+            steps{
+                script{
+                    aws_cluster.deploy_app()
                 }
             }
         }

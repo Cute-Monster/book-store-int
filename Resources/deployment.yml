@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: Test-Deployment-CR
-          image: 315727832121.dkr.ecr.us-east-1.amazonaws.com/maven-cruntov:latest
+          image: image-repo:imge-tag
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
