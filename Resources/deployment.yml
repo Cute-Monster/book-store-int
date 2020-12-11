@@ -1,6 +1,6 @@
 ---
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
   name: Test-Deployment-CR
 spec:
@@ -8,13 +8,12 @@ spec:
   selector:
     matchLabels:
       app: Test-Deployment-CR
-      version: blue
+      version: 54
   template:
     metadata:
-      name: hello-blue-whale-pod
       labels:
         app: Test-Deployment-CR-MVN
-        version: blue
+        version: 54
     spec:
       containers:
         - name: Test-Deployment-CR
@@ -22,19 +21,22 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+              protocol: TCP
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: test-svc
   labels:
-    app: test-app
+    app: Test-Deployment-CR-MVN-SVC
 spec:
   selector:
     app: Test-Deployment-CR-MVN
-    version: blue
+    version: 54
   type: NodePort
   ports:
-    - nodePort: 31113
-      port: 80
+    - nodePort: 85
+      protocol: TCP
+      port: 8080
       targetPort: 8080
