@@ -20,9 +20,6 @@ pipeline {
         stage('Preparing'){
             steps{
                 script{
-                    sh("""
-                        ls /var/jenkins_home
-                    """)
                     test_docker = new Docker_ECR(steps, this)
                 }
             }
