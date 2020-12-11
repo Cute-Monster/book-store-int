@@ -53,7 +53,7 @@ pipeline {
                 script{
 //                     aws_cluster.deploy_app()
                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}") {
-                         kubernetesDeploy(configs: "${Resources/deployment.yml}", kubeconfigId: 'cruntov_kuber_master_config')
+                         kubernetesDeploy(configs: "Resources/deployment.yml", kubeconfigId: 'cruntov_kuber_master_config')
                     }
                 }
             }
