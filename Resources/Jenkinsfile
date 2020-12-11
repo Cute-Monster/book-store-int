@@ -57,7 +57,7 @@ pipeline {
                     )
                     sh("""
                         cat deployment.yml
-                    ")
+                    """)
                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}") {
                          kubernetesDeploy(configs: "deployment.yml", kubeconfigId: 'cruntov_kuber_master_config')
                     }
