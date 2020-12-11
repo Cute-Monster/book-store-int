@@ -53,7 +53,7 @@ pipeline {
                 script{
 //                     aws_cluster.deploy_app()
                     sh(
-                       """sed -i -e "s/image-repo\:image-tag/315727832121.dkr.ecr.us-east-1.amazonaws.com\/maven-cruntov\:54/g" deployment.ym"""
+                       """sed -i -e "s/image-repo\\:image-tag/315727832121.dkr.ecr.us-east-1.amazonaws.com\\/maven-cruntov\\:54/g" deployment.yml"""
                     )
                     sh("""
                         cat deployment.yml
