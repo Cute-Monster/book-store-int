@@ -2,7 +2,6 @@
 
 import org.cruntov.jenkins.components.*
 def aws_cluster = new Kubernetes_Cluster(steps)
-// def test_docker = new Docker_ECR(steps, this)
 
 pipeline {
     agent {
@@ -14,7 +13,6 @@ pipeline {
         Docker_Registry = '315727832121.dkr.ecr.us-east-1.amazonaws.com'
         ECR_Repository = 'maven-cruntov'
         Docker_Creds = 'CR_AWS_ECR'
-        Dockerfile_Path =  sh("pwd")
 
     }
 
@@ -22,9 +20,6 @@ pipeline {
         stage('Preparing'){
             steps{
                 script{
-                    echo("""
-                        ${Dockerfile_Path}
-                    """)
                     test_docker = new Docker_ECR(steps, this)
                 }
             }
