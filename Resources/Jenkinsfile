@@ -23,7 +23,7 @@ pipeline {
             steps{
                 script{
                     echo("""
-                        ${Dockerfile_Path}
+                        ${Dockerfile_Path.path}
                     """)
                     test_docker = new Docker_ECR(steps, this)
                 }
