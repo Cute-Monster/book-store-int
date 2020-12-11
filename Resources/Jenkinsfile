@@ -30,11 +30,6 @@ pipeline {
             steps{
                 script{
                     test_docker.build_image()
-// //                     test_docker.build_image()
-//                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
-//                         dockerImage = docker.build("${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER}", "-f ${Dockerfile_Path}" + " .")
-//                     }
-                }
             }
         }
 
@@ -42,10 +37,6 @@ pipeline {
             steps{
                 script{
                     test_docker.push_to_ecr()
-//                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
-//                         dockerImage.push('${BUILD_NUMBER}')
-//                     }
-
                 }
             }
         }
@@ -53,40 +44,13 @@ pipeline {
             steps{
                 script{
                     test_docker.image_remove()
-//                     sh('docker rmi ${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER} --force')
                 }
             }
         }
-
-//         stage('Kuber Deploy'){
-//             steps{
-//                 script{
-//                     cl
-//                 }
-//             }
-//         }
-
-//         stage('Testing Shared'){
-//             steps{
-//                 script{
-//                     aws_cluster.terraform()
-//                 }
-//             }
-//         }
-//         when(
-//             branch 'master'
-//         ){
-//             stage('Creating Cluster'){
-//                 steps{
-//
-//                 }
-//
-//             }
-//         }
     }
     post{
         always{
-            Workspace_Cleaning()
+//             Workspace_Cleaning()
         }
     }
 }
