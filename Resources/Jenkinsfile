@@ -41,10 +41,10 @@ pipeline {
         stage('Push Image to ECR'){
             steps{
                 script{
-//                     test_docker.push_to_ecr()
-                    docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
-                        dockerImage.push('${BUILD_NUMBER}')
-                    }
+                    test_docker.push_to_ecr()
+//                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}"){
+//                         dockerImage.push('${BUILD_NUMBER}')
+//                     }
 
                 }
             }
@@ -52,7 +52,8 @@ pipeline {
         stage('Docker Image removing'){
             steps{
                 script{
-                    sh('docker rmi ${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER} --force')
+                    test_docker.image_remove()
+//                     sh('docker rmi ${Docker_Registry}/${ECR_Repository}:${BUILD_NUMBER} --force')
                 }
             }
         }
@@ -65,13 +66,13 @@ pipeline {
 //             }
 //         }
 
-        stage('Testing Shared'){
-            steps{
-                script{
-                    aws_cluster.terraform()
-                }
-            }
-        }
+//         stage('Testing Shared'){
+//             steps{
+//                 script{
+//                     aws_cluster.terraform()
+//                 }
+//             }
+//         }
 //         when(
 //             branch 'master'
 //         ){
