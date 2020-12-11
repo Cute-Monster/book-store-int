@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: Test-Deployment-CR
-          image: image-repo:imge-tag
+          image: image-repo:image-tag
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
