@@ -51,6 +51,9 @@ pipeline {
     }
     post{
         always{
+        echo("""
+            ALWAYS THIS
+        """)
 //             Workspace_Cleaning()
         }
     }
