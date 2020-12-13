@@ -63,7 +63,8 @@ pipeline {
 //                     }
 //                     kubernetesDeploy(configs: "Resources/deployment.yml", kubeconfigId: 'cruntov_kuber_master_config')
 //                 }
-                kubernetesDeploy configs: 'deployment1.yml', kubeConfig: [path: ''], kubeconfigId: 'cruntov_kuber_master_config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+//                 kubernetesDeploy configs: 'deployment1.yml', kubeConfig: [path: ''], kubeconfigId: 'cruntov_kuber_master_config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                kubernetesDeploy configs: 'Resources/deployment.yml', kubeConfig: [path: ''], kubeconfigId: 'cruntov_gcloud_kuber_config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
             }
         }
     }
