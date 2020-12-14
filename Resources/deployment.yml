@@ -21,8 +21,8 @@ spec:
           name: petclinic
           ports:
             - containerPort: 8080
-              hostPort: 8080
-              protocol: TCP
+#              hostPort: 8080
+#              protocol: TCP
           livenessProbe:
             httpGet:
               scheme: HTTP
@@ -41,16 +41,16 @@ metadata:
   name: "petclinic-mvn"
   namespace: "default"
 spec:
-  externalTrafficPolicy: Local
+#  externalTrafficPolicy: Local
   ports:
     - nodePort: 32640
       protocol: "TCP"
       port: 8080
-      targetPort: 8080
+#      targetPort: 8080
   externalIPs:
     - "192.168.15.123"
   type: "NodePort"
 #  loadBalancerIP: "192.168.15.123"
   selector:
     app: "petclinic"
-  sessionAffinity: None
+#  sessionAffinity: None
