@@ -1,10 +1,9 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: petclinic-mvn
   labels:
     app: petclinic
-  name: petclinic
 spec:
   replicas: 1
   selector:
@@ -14,15 +13,12 @@ spec:
     metadata:
       labels:
         app: petclinic
-      name: petclinic
     spec:
       containers:
         - image: image-repo:image-tag
-          imagePullPolicy: Always
           name: petclinic
           ports:
             - containerPort: 8080
-              protocol: TCP
           livenessProbe:
             httpGet:
               scheme: HTTP
@@ -32,22 +28,18 @@ spec:
         - name: "ecr-cruntov-creds"
 
 
+
 ---
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  labels:
-    app: petclinic-mvn
-  name: petclinic-mvn
-  namespace: "default"
+  name: petclinic-service
 spec:
-  ports:
-    - protocol: TCP
-      port: 8080
-      nodePort: 32640
-      targetPort: 8080
-  externalIPs:
-    - "10.10.0.7"
-  type: "NodePort"
   selector:
     app: petclinic
+  ports:
+    - port: 8081
+      targetPort: 8080
+      nodePort: 30008
+  type: LoadBalancer
+
