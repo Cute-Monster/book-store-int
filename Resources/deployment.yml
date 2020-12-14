@@ -22,7 +22,7 @@ spec:
           ports:
             - containerPort: 8080
       imagePullSecrets:
-        - name: "ecr_creds"
+        - name: "ecr-cruntov-creds"
 
 ---
 apiVersion: v1
