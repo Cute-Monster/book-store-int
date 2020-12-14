@@ -56,7 +56,7 @@ pipeline {
                        """sed -i -e "s/image-repo\\:image-tag/${Docker_Registry}\\/${ECR_Repository}\\:${GIT_COMMIT}/g" Resources/deployment.yml"""
                     )
                     sh("""
-                        cat deployment.yml
+                        cat Resources/deployment.yml
                        """)
                     kubernetesDeploy configs: 'Resources/deployment.yml', dockerCredentials: [[credentialsId: 'AWS_ECR_CR', url: 'http://315727832121.dkr.ecr.us-east-1.amazonaws.com']], kubeConfig: [path: ''], kubeconfigId: 'CR_Kube_Config', secretName: 'ecr-maven-cruntov', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
 //                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}") {
