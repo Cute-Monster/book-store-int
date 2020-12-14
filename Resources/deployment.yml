@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   labels:
     app: petclinic
-  name: petclinic-mvn
+  name: petclinic
 spec:
   replicas: 1
   selector:
@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         app: petclinic
+      name: petclinic
     spec:
       containers:
         - image: image-repo:image-tag
@@ -37,13 +38,13 @@ kind: Service
 apiVersion: v1
 metadata:
   labels:
-    app: "petclinic-mvn"
-  name: "petclinic-mvn"
+    app: "petclinic"
+  name: "petclinic"
   namespace: "default"
 spec:
 #  externalTrafficPolicy: Local
   ports:
-    - protocol: "TCP"
+    - protocol: TCP
       port: 8080
       nodePort: 32640
       targetPort: 8080
@@ -52,5 +53,5 @@ spec:
   type: "NodePort"
 #  loadBalancerIP: "192.168.15.123"
   selector:
-    app: "petclinic"
+    app: petclinic
 #  sessionAffinity: None
