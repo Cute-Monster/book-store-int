@@ -22,7 +22,7 @@ spec:
           ports:
             - containerPort: 8080
 #              hostPort: 8080
-#              protocol: TCP
+              protocol: TCP
           livenessProbe:
             httpGet:
               scheme: HTTP
@@ -43,12 +43,12 @@ metadata:
 spec:
 #  externalTrafficPolicy: Local
   ports:
-    - nodePort: 32640
-      protocol: "TCP"
+    - protocol: "TCP"
       port: 8080
-#      targetPort: 8080
+      nodePort: 32640
+      targetPort: 8080
   externalIPs:
-    - "192.168.15.123"
+    - "127.0.0.1"
   type: "NodePort"
 #  loadBalancerIP: "192.168.15.123"
   selector:
