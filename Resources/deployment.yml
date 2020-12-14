@@ -35,13 +35,13 @@ metadata:
   name: petclinic-mvn
 spec:
   ports:
-    - nodePort: 30123
-      port: 8080
+#    - nodePort: 30123
+    - port: 8080
       targetPort: 8080
       protocol: TCP
       appProtocol: TCP
   externalIPs:
-      - "192.168.3.65"
+    - "192.168.3.65"
   selector:
     app: petclinic
   type: NodePort
