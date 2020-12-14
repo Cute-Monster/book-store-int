@@ -22,4 +22,5 @@ RUN mvn test sonar:sonar \
 #############################################
 FROM openjdk:11.0.9.1-jre-buster
 COPY --from=build /usr/src/app/target/*.jar ./SNAPSHOT.jar
+EXPOSE 8080
 CMD ["java", "-jar", "./SNAPSHOT.jar"]
