@@ -41,7 +41,7 @@ metadata:
   name: "petclinic-mvn"
   namespace: "default"
 spec:
-  externalTrafficPolicy: Cluster
+  externalTrafficPolicy: Local
   ports:
     - nodePort: 32640
       protocol: "TCP"
