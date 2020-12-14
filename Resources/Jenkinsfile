@@ -58,7 +58,7 @@ pipeline {
                     sh("""
                         cat Resources/deployment.yml
                        """)
-                    kubernetesDeploy configs: 'Resources/deployment.yml', dockerCredentials: [[credentialsId: 'AWS_ECR_CR', url: 'https://315727832121.dkr.ecr.us-east-1.amazonaws.com']], kubeConfig: [path: ''], kubeconfigId: 'CR_Kube_Config', secretName: 'ecr-maven-cruntov', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                    kubernetesDeploy configs: 'Resources/deployment.yml', dockerCredentials: [[credentialsId: 'ecr:us-east-1:CR_AWS_ECR', url: 'https://315727832121.dkr.ecr.us-east-1.amazonaws.com']], kubeConfig: [path: ''], kubeconfigId: 'CR_Kube_Config', secretName: 'ecr-docker-creds', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
 //                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}") {
 //                          kubernetesDeploy(configs: "Resources/deployment.yml", kubeconfigId: 'cruntov_kuber_master_config')
 //                     }
