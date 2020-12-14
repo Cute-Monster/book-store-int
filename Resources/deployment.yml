@@ -3,30 +3,33 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: myweb
-  name: myweb
+    app: petclinic
+  name: petclinic-mvn
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: myweb
+      app: petclinic
   template:
     metadata:
       labels:
-        app: myweb
+        app: petclinic
     spec:
       containers:
         - image: library/nginx:latest
           imagePullPolicy: Always
-          name: myweb
+          name: petclinic
+          ports:
+            - containerPort: 80
+              protocol: TCP
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: myweb
-  name: myweb
+    app: petclinic
+  name: petclinic-mvn
 spec:
   ports:
     - nodePort: 32223
@@ -34,5 +37,5 @@ spec:
       protocol: TCP
       targetPort: 80
   selector:
-    app: myweb
+    app: petclinic
   type: NodePort

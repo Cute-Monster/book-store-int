@@ -16,7 +16,7 @@ spec:
         app: petclinic
     spec:
       containers:
-        - image: nginx:latest
+        - image: library/nginx:latest
           imagePullPolicy: Always
           name: myweb
 

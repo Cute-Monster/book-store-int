@@ -1,36 +1,41 @@
 ---
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: Test-Deployment-CR
+  labels:
+    app: petclinic
+  name: petclinic-mvn
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petclinic
   template:
     metadata:
       labels:
-        app: Test-Deployment-CR-MVN
-        version: 54
+        app: petclinic
     spec:
       containers:
-        - name: Test-Deployment-CR
-          image: image-repo:image-tag
+        - image: library/nginx:latest
           imagePullPolicy: Always
+          name: petclinic
           ports:
-            - containerPort: 8080
+            - containerPort: 80
               protocol: TCP
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: test-svc
   labels:
-    app: Test-Deployment-CR-MVN-SVC
+    app: petclinic
+  name: petclinic-mvn
 spec:
-  selector:
-    app: Test-Deployment-CR-MVN
-  type: NodePort
   ports:
-    - nodePort: 8080
+    - nodePort: 32223
+      port: 80
       protocol: TCP
-      port: 8080
-      targetPort: 8080
+      targetPort: 80
+  selector:
+    app: petclinic
+  type: NodePort
