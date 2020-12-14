@@ -26,6 +26,26 @@ spec:
       imagePullSecrets:
         - name: "ecr-cruntov-creds"
 
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  labels:
+#    app: petclinic
+#  name: petclinic-mvn
+#spec:
+#  ports:
+#    - nodePort: 30123
+#      port: 8080
+#      targetPort: 8080
+#      protocol: TCP
+#      appProtocol: TCP
+#  externalIPs:
+#    - "192.168.3.65"
+#  selector:
+#    app: petclinic
+#  type: NodePort
+#
 ---
 apiVersion: v1
 kind: Service
@@ -34,14 +54,11 @@ metadata:
     app: petclinic
   name: petclinic-mvn
 spec:
+  selector:
+    app: petclinic
   ports:
-    - nodePort: 30123
-      port: 8080
+    - port: 8080
       targetPort: 8080
       protocol: TCP
       appProtocol: TCP
-  externalIPs:
-    - "192.168.3.65"
-  selector:
-    app: petclinic
-  type: NodePort
+  type: LoadBalancer
