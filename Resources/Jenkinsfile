@@ -58,14 +58,15 @@ pipeline {
                     sh("""
                         cat Resources/deployment.yml
                        """)
-                    kubernetesDeploy configs: 'Resources/deployment.yml', dockerCredentials: [[credentialsId: "ecr:${Aws_Region}:${Docker_Creds}", url: "https://${Docker_Registry}"]], kubeConfig: [path: ''], kubeconfigId: 'CR_Kube_Config', secretName: 'ecr-docker-creds', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+//                     kubernetesDeploy configs: 'Resources/deployment.yml', dockerCredentials: [[credentialsId: "ecr:${Aws_Region}:${Docker_Creds}", url: "https://${Docker_Registry}"]], kubeConfig: [path: ''], kubeconfigId: 'CR_Kube_Config', secretName: 'ecr-docker-creds', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
 //                     docker.withRegistry("https://${Docker_Registry}", "ecr:${Aws_Region}:${Docker_Creds}") {
 //                          kubernetesDeploy(configs: "Resources/deployment.yml", kubeconfigId: 'cruntov_kuber_master_config')
 //                     }
 //                     kubernetesDeploy(configs: "Resources/deployment.yml", kubeconfigId: 'cruntov_kuber_master_config')
-                }
+
 //                 kubernetesDeploy configs: 'deployment1.yml', kubeConfig: [path: ''], kubeconfigId: 'cruntov_kuber_master_config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
-//                 kubernetesDeploy configs: 'Resources/deployment.yml', enableConfigSubstitution: false, kubeConfig: [path: ''], kubeconfigId: 'CR_Kube_Config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                    kubernetesDeploy configs: 'Resources/deployment.yml', enableConfigSubstitution: false, kubeConfig: [path: ''], kubeconfigId: 'CR_Kube_Config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                }
             }
         }
     }
