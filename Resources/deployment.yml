@@ -16,11 +16,11 @@ spec:
         app: petclinic
     spec:
       containers:
-        - image: library/nginx:latest
+        - image: image-repo:image-tag
           imagePullPolicy: Always
           name: petclinic
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               protocol: TCP
 
 ---
@@ -32,10 +32,10 @@ metadata:
   name: petclinic-mvn
 spec:
   ports:
-    - nodePort: 32223
+    - nodePort: 80
       port: 80
       protocol: TCP
-      targetPort: 80
+      targetPort: 8080
   selector:
     app: petclinic
   type: NodePort
