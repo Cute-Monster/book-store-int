@@ -22,6 +22,10 @@ pipeline {
                 script{
                     test_docker = new Docker_ECR(steps, this)
                     aws_cluster = new Kubernetes_Cluster(steps, this)
+
+                    sh("""
+                        cat Resources/Dockerfile
+                    """)
                 }
             }
         }
