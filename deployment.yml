@@ -16,7 +16,7 @@ spec:
         app: petclinic
     spec:
       containers:
-        - image: library/nginx:latest
+        - image: image-repo:image-tag
           imagePullPolicy: Always
           name: petclinic
           ports:
