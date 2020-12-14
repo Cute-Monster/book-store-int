@@ -52,13 +52,6 @@ pipeline {
             steps{
                 script{
                     aws_cluster.deploy_app()
-//                     sh(
-//                        """sed -i -e "s/image-repo\\:image-tag/${Docker_Registry}\\/${ECR_Repository}\\:${GIT_COMMIT}/g" Resources/deployment.yml"""
-//                     )
-//                     sh("""
-//                         cat Resources/deployment.yml
-//                        """)
-//                     kubernetesDeploy(configs: 'Resources/deployment.yml', enableConfigSubstitution: false, kubeConfig: [path: ''], kubeconfigId: 'CR_Kube_Config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://'])
                 }
             }
         }
