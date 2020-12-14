@@ -21,6 +21,8 @@ spec:
           name: petclinic
           ports:
             - containerPort: 8080
+      imagePullSecrets:
+        - name: "ecr_creds"
 
 ---
 apiVersion: v1
