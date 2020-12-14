@@ -21,6 +21,8 @@ spec:
           name: petclinic
           ports:
             - containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
       imagePullSecrets:
         - name: "ecr-cruntov-creds"
 
@@ -32,12 +34,14 @@ metadata:
     app: petclinic
   name: petclinic-mvn
 spec:
-  ports:
-    - nodePort: 30123
-      port: 8080
-      targetPort: 8080
-  externalIPs:
-    - "192.168.3.65"
   selector:
     app: petclinic
+  ports:
+      #    - nodePort: 30123
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      appProtocol: TCP
+  externalIPs:
+      - "192.168.3.65"
   type: LoadBalancer
