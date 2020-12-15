@@ -13,6 +13,8 @@ pipeline {
         Docker_Registry = '315727832121.dkr.ecr.us-east-1.amazonaws.com'
         ECR_Repository = 'maven-cruntov'
         Docker_Creds = 'CR_AWS_ECR'
+        Kube_Config = 'CR_Kube_Config'
+        Kuber_Secret = 'ecr-cruntov-creds'
 
     }
 
