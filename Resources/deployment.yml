@@ -30,16 +30,32 @@ spec:
 
 
 ---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: petclinic-service
+#spec:
+#  selector:
+#    app: petclinic
+#  ports:
+#    - port: 8080
+#      targetPort: 8080
+#      nodePort: 30008
+#  type: NodePort
+
 apiVersion: v1
 kind: Service
 metadata:
   name: petclinic-service
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: True
+  labels:
+    app: petclinic
 spec:
+  type: LoadBalancer
   selector:
     app: petclinic
   ports:
-    - port: 8080
+    - port: 80
       targetPort: 8080
-      nodePort: 30008
-  type: NodePort
-
+      protocol: TCP
