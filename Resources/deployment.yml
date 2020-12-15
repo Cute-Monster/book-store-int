@@ -15,7 +15,7 @@ spec:
         app: petclinic
     spec:
       containers:
-        - image: "var:$Docker_Registry/var:$ECR_Repository:var:$GIT_COMMIT"
+        - image: "$Docker_Registry/$ECR_Repository:$GIT_COMMIT"
           name: petclinic
           ports:
             - containerPort: 8080
@@ -25,7 +25,7 @@ spec:
               path: /
               port: 8080
       imagePullSecrets:
-        - name: "var:$Kuber_Secret"
+        - name: "$Kuber_Secret"
 
 
 
