@@ -30,6 +30,7 @@ pipeline {
                     sh("""
                         cat Resources/Dockerfile
                     """)
+                    sh("envsubst --help")
                 }
             }
         }
