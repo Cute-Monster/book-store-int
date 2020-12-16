@@ -49,14 +49,35 @@ pipeline {
                 }
             }
         }
-
-        stage('Kuber Deploy'){
-            steps{
-                script{
-                    aws_cluster.deploy_app()
+        when(
+            input {
+              message 'Run deploy?'
+              id 'Kuber_Deploy_Ask'
+              ok 'yes'
+              parameters {
+                choice choices: ['yes', 'no'], description: 'Run deploy', name: 'Kuber_Deploy'
+              }
+            } == 'yes'
+        ){
+        
+            stage('Infrastructure build'){
+                steps{
+                    script{
+                        build 'cruntov_Kuber_AWS/master'
+                    }
                 }
             }
+
+            stage('Kuber Deploy'){
+                steps{
+                    script{
+                        aws_cluster.deploy_app()
+                    }
+                }
+            }
+
         }
+
     }
     post{
         always{
