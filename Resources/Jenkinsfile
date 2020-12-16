@@ -46,36 +46,40 @@ pipeline {
             steps{
                 script{
                     test_docker.image_remove()
-                    Question = input {
-                                             message 'Run deploy?'
-                                             id 'Kuber_Deploy_Ask'
-                                             ok 'yes'
-                                             parameters {
-                                               choice choices: ['yes', 'no'], description: 'Run deploy', name: 'Kuber_Deploy'
-                                             }
-                                           }
                 }
             }
         }
 
             stage('Infrastructure build'){
+                when {
+                    branch: 'master'
+                }
                 steps{
                     script{
-                        when {
-                                  environment name: 'Question', value: 'yes'
-                                }
-                        build 'cruntov_Kuber_AWS/master'
+                        def Question = input {
+                            message 'Run deploy?'
+                            id 'Kuber_Deploy_Ask'
+                            ok 'yes'
+                            parameters {
+                                choice choices: ['yes', 'no'], description: 'Run deploy', name: 'Kuber_Deploy'
+                            }
+                        }
+                        if(Question == 'yes'){
+                            build 'cruntov_Kuber_AWS/master'
+                        }
                     }
                 }
             }
 
             stage('Kuber Deploy'){
+                when {
+                    branch: 'master'
+                }
                 steps{
                     script{
-                    when {
-                              environment name: 'Question', value: 'yes'
-                            }
-                        aws_cluster.deploy_app()
+                        if(Question == 'yes'){
+                            aws_cluster.deploy_app()
+                        }
                     }
                 }
             }
