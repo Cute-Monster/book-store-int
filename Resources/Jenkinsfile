@@ -52,7 +52,7 @@ pipeline {
 
             stage('Infrastructure build'){
                 when {
-                    branch: 'master'
+                    expression{ BRANCH_NAME == 'master' }
                 }
                 steps{
                     script{
@@ -73,7 +73,7 @@ pipeline {
 
             stage('Kuber Deploy'){
                 when {
-                    branch: 'master'
+                    expression{ BRANCH_NAME == 'master' }
                 }
                 steps{
                     script{
