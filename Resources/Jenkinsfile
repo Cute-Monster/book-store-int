@@ -58,13 +58,12 @@ pipeline {
             }
         }
 
-        when {
-          environment name: 'Question', value: 'yes'
-        }{
-
             stage('Infrastructure build'){
                 steps{
                     script{
+                        when {
+                                  environment name: 'Question', value: 'yes'
+                                }
                         build 'cruntov_Kuber_AWS/master'
                     }
                 }
@@ -73,12 +72,15 @@ pipeline {
             stage('Kuber Deploy'){
                 steps{
                     script{
+                    when {
+                              environment name: 'Question', value: 'yes'
+                            }
                         aws_cluster.deploy_app()
                     }
                 }
             }
 
-        }
+
 
     }
     post{
