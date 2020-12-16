@@ -60,10 +60,10 @@ pipeline {
                             message 'Run deploy?'
                             id 'Kuber_Deploy_Ask'
                             ok 'yes'
-                            parameters [
-                                string(name: 'No', defaultValue: 'no', description: 'Run deploy?'),
-                                string(name: 'Yes', defaultValue: 'yes', description: 'Run deploy?'),
-                            ]
+                            parameters {
+                                string(name: 'Question', defaultValue: 'no', description: 'Run deploy?'),
+                                string(name: 'Question', defaultValue: 'yes', description: 'Run deploy?'),
+                            }
                         }
                         if(Question == 'yes'){
                             build 'cruntov_Kuber_AWS/master'
