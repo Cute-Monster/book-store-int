@@ -56,14 +56,14 @@ pipeline {
                 }
                 steps{
                     script{
-                        QUESTION = input(
-                            id: 'Deploy_Kuber'
-                            message: 'Run Deploy?'
+                        QUESTION = input{
+                            id: 'Deploy_Kuber',
+                            message: 'Run Deploy?',
                             ok: 'yes'
-                            parameters{
+                            parameters[
                                 string(name: 'QUESTION', defaultValue: 'yes')
-                            }
-                        )
+                            ]
+                        }
                         if(QUESTION == 'yes'){
                             build 'cruntov_Kuber_AWS/master'
                         }
