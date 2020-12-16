@@ -59,8 +59,8 @@ pipeline {
                         QUESTION = input(
                             id: 'Deploy_Kuber',
                             message: 'Run Deploy?',
-                            ok: 'yes'
-                            parameters[
+                            ok: 'yes',
+                            parameters: [
                                 string(name: 'QUESTION', defaultValue: 'yes')
                             ]
                         )
