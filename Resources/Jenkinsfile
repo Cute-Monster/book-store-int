@@ -46,20 +46,22 @@ pipeline {
             steps{
                 script{
                     test_docker.image_remove()
+                    Question = input {
+                                             message 'Run deploy?'
+                                             id 'Kuber_Deploy_Ask'
+                                             ok 'yes'
+                                             parameters {
+                                               choice choices: ['yes', 'no'], description: 'Run deploy', name: 'Kuber_Deploy'
+                                             }
+                                           }
                 }
             }
         }
-        when(
-            input {
-              message 'Run deploy?'
-              id 'Kuber_Deploy_Ask'
-              ok 'yes'
-              parameters {
-                choice choices: ['yes', 'no'], description: 'Run deploy', name: 'Kuber_Deploy'
-              }
-            } == 'yes'
-        ){
-        
+
+        when {
+          environment name: 'Question', value: 'yes'
+        }{
+
             stage('Infrastructure build'){
                 steps{
                     script{
