@@ -57,9 +57,9 @@ pipeline {
                 steps{
                     script{
                         def Question = input {
-                            message 'Run deploy?'
-                            id 'Kuber_Deploy_Ask'
-                            ok 'yes'
+                            message: 'Run deploy?'
+                            id: 'Kuber_Deploy_Ask'
+                            ok: 'yes'
                             parameters {
                                 string(name: 'Question', defaultValue: 'no', description: 'Run deploy?')
                             }
