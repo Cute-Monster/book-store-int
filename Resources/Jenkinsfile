@@ -57,9 +57,9 @@ pipeline {
                 steps{
                     script{
                         QUESTION = input(
-                            id: 'Deploy_Kuber',
-                            message: 'Run Deploy?',
-                            ok: 'yes',
+                            id 'Deploy_Kuber',
+                            message 'Run Deploy?',
+                            ok 'yes',
                             parameters{
                                 string(name: 'QUESTION', defaultValue: 'yes')
                             }
