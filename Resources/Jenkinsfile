@@ -60,7 +60,7 @@ pipeline {
                             message: 'Run Deploy?',
                             ok: 'yes',
                             parameters{
-                                string([name: 'QUESTION', defaultValue: 'yes'])
+                                string(name: 'QUESTION', defaultValue: 'yes')
                             }
                         )
                         if(QUESTION == 'yes'){
