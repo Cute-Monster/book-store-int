@@ -49,11 +49,11 @@ metadata:
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 spec:
-#  type: LoadBalancer
+  type: NodePort
   selector:
     app: petclinic
   ports:
-    - name: http
+    - nodePort: 30718
       protocol: TCP
       port: 80
       targetPort: 8080
