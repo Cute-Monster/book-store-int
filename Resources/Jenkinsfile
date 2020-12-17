@@ -50,26 +50,26 @@ pipeline {
             }
         }
 
-            stage('Infrastructure build'){
-                when {
-                    expression{ BRANCH_NAME == 'master' }
-                }
-                steps{
-                    script{
-                        QUESTION = input(
-                            id: 'Deploy_Kuber',
-                            message: 'Run Deploy?',
-                            ok: 'yes',
-                            parameters: [
-                                string(name: 'QUESTION', defaultValue: 'yes')
-                            ]
-                        )
-                        if(QUESTION == 'yes'){
-                            build 'cruntov_Kuber_AWS/master'
-                        }
-                    }
-                }
-            }
+//             stage('Infrastructure build'){
+//                 when {
+//                     expression{ BRANCH_NAME == 'master' }
+//                 }
+//                 steps{
+//                     script{
+//                         QUESTION = input(
+//                             id: 'Deploy_Kuber',
+//                             message: 'Run Deploy?',
+//                             ok: 'yes',
+//                             parameters: [
+//                                 string(name: 'QUESTION', defaultValue: 'yes')
+//                             ]
+//                         )
+//                         if(QUESTION == 'yes'){
+//                             build 'cruntov_Kuber_AWS/master'
+//                         }
+//                     }
+//                 }
+//             }
 
             stage('Kuber Deploy'){
                 when {
@@ -77,9 +77,9 @@ pipeline {
                 }
                 steps{
                     script{
-                        if(QUESTION == 'yes'){
+//                         if(QUESTION == 'yes'){
                             aws_cluster.deploy_app()
-                        }
+//                         }
                     }
                 }
             }
