@@ -89,18 +89,12 @@ pipeline {
     }
     post{
         always{
-        echo("""
-            ALWAYS THIS
-        """)
             Workspace_Cleaning()
         }
     }
 }
 
 def Workspace_Cleaning(){
-        echo("""
-            Cleaning Workspace now
-        """)
         cleanWs()
         echo("""
              Workspace Cleaned
