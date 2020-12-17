@@ -48,6 +48,10 @@ metadata:
   name: petclinic-nodeport
 #  namespace: deployment
 spec:
+  externalTrafficPolicy: Cluster
+  externalIPs:
+    - 3.239.33.116
+  sessionAffinity: ClientIP
   type: NodePort
   selector:
     app: petclinic
@@ -56,3 +60,8 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 8080
+      nodePort: 30178
+status:
+  loadBalancer:
+    ingress:
+      - ip: 3.239.33.116
