@@ -40,40 +40,20 @@ spec:
 
 
 # Creating ClusterIP Services
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: petclinic-nodeport
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb-ip
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: petclinic
   ports:
-#    - nodePort: 30718
-#    - protocol: TCP
     - port: 80
       targetPort: 8080
-status:
-  loadBalancer:
-    ingress:
-      - ip: 192.0.2.42
-
-#---
-#apiVersion: networking.k8s.io/v1
-#kind: Ingress
-#metadata:
-#  name: petclinic-ingress
-#spec:
-#  rules:
-#    - host: 34.232.95.97
-#      http:
-#        paths:
-#          - path: /petclinic
-#            backend:
-#              serviceName: petclinic-nodeport
-#              servicePort: 30718
-
+      nodePort: 30718
+      name: petclinic-port
