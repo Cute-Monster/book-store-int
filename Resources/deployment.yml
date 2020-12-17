@@ -46,11 +46,10 @@ kind: Service
 metadata:
   name: petclinic-nodeport
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: petclinic
   ports:
     - port: 80
       targetPort: 8080
       nodePort: 30718
-      name: petclinic-port
