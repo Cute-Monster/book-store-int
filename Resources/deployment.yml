@@ -46,31 +46,35 @@ apiVersion: v1
 kind: Service
 metadata:
   name: petclinic-nodeport
-#  namespace: deployment
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 spec:
-  type: ClusterIP
-  ports:
-    - port: 80
-      targetPort: 8080
-      protocol: TCP
-      nodePort: 30718
+  type: LoadBalancer
   selector:
     app: petclinic
-  externalIPs:
-    - 3.239.33.115
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+  clusterIP: 10.102.162.225
+status:
+  loadBalancer:
+    ingress:
+      - ip: 192.0.2.42
 
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: petclinic-ingress
-spec:
-  rules:
-    - host: 34.232.95.97
-      http:
-        paths:
-          - path: /petclinic
-            backend:
-              serviceName: petclinic-nodeport
-              servicePort: 30718
+#---
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+#  name: petclinic-ingress
+#spec:
+#  rules:
+#    - host: 34.232.95.97
+#      http:
+#        paths:
+#          - path: /petclinic
+#            backend:
+#              serviceName: petclinic-nodeport
+#              servicePort: 30718
 
