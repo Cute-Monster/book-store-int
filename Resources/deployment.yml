@@ -1,16 +1,16 @@
-# Creating Namespace
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: deployment
+## Creating Namespace
+#---
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: deployment
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: petclinic-mvn
-  namespace: deployment
+#  namespace: deployment
   labels:
     app: petclinic
 spec:
@@ -22,7 +22,7 @@ spec:
     metadata:
       labels:
         app: petclinic
-      namespace: deployment
+#      namespace: deployment
     spec:
       containers:
         - image: "$Docker_Registry/$ECR_Repository:$GIT_COMMIT"
@@ -108,8 +108,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-ingress
-  namespace: deployment
+  name: petclinic-ingress
+#  namespace: deployment
 spec:
   type: NodePort
   ports:
