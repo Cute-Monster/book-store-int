@@ -47,20 +47,20 @@ kind: Service
 metadata:
   name: petclinic-nodeport
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-internal: True
+    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: petclinic
   ports:
-    - nodePort: 30718
-      protocol: TCP
-      port: 80
+#    - nodePort: 30718
+#    - protocol: TCP
+    - port: 80
       targetPort: 8080
-status:
-  loadBalancer:
-    ingress:
-      - ip: 192.0.2.42
+#status:
+#  loadBalancer:
+#    ingress:
+#      - ip: 192.0.2.42
 
 #---
 #apiVersion: networking.k8s.io/v1
