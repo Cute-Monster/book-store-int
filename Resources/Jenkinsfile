@@ -77,9 +77,9 @@ pipeline {
                 }
                 steps{
                     script{
-//                         if(QUESTION == 'yes'){
+                        if(QUESTION == 'yes'){
                             aws_cluster.deploy_app()
-//                         }
+                        }
                     }
                 }
             }
