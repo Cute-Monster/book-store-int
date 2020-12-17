@@ -47,9 +47,9 @@ metadata:
   name: petclinic-nodeport
   annotations:
 #    service.beta.kubernetes.io/aws-load-balancer-type: nlb-ip
-    service.beta.kubernetes.io/aws-load-balancer-internal: 172.31.6.0/16
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: petclinic
   ports:
