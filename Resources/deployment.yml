@@ -51,7 +51,7 @@ spec:
   externalTrafficPolicy: Cluster
   externalIPs:
     - 3.239.33.116
-  sessionAffinity: ClientIP
+  sessionAffinity: None
   type: NodePort
   selector:
     app: petclinic
