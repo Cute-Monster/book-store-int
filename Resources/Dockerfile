@@ -28,5 +28,6 @@ COPY --from=build /usr/src/app/target/*.jar ./SNAPSHOT.jar
 ENV MYSQL_USER=${SQL_USER}
 ENV MYSQL_PASS=${SQL_PASS}
 ENV MYSQL_URL=${SQL_URL}
+RUN echo "${MYSQL_URL}"
 EXPOSE 8080
 CMD ["java", "-jar", "./SNAPSHOT.jar"]
