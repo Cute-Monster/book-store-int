@@ -1,10 +1,11 @@
 #############################################
 #               Build & Test                #
 #############################################
-FROM maven:3.6.3-jdk-11-openj9  AS build
 ARG SQL_USER
 ARG SQL_PASS
 ARG SQL_URL
+
+FROM maven:3.6.3-jdk-11-openj9  AS build
 WORKDIR /usr/src/app
 COPY ./pom.xml ./pom.xml
 COPY ./src ./src
@@ -28,6 +29,7 @@ COPY --from=build /usr/src/app/target/*.jar ./SNAPSHOT.jar
 ENV MYSQL_USER=${SQL_USER}
 ENV MYSQL_PASS=${SQL_PASS}
 ENV MYSQL_URL=${SQL_URL}
-RUN echo $MYSQL_URL
+RUN echo ${MYSQL_URL}
+RUN echo 'ARGS --> ${SQL_URL}'
 EXPOSE 8080
 CMD ["java", "-jar", "./SNAPSHOT.jar"]
