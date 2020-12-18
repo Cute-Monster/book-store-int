@@ -9,7 +9,7 @@ pipeline {
     }
 
     environment {
-        Skip_Cluster_Build_Text = '\[skip\ cluster\]'
+        Skip_Cluster_Build_Text = "\[skip\ cluster\]"
         Aws_Region = 'us-east-1'
         Docker_Registry = '315727832121.dkr.ecr.us-east-1.amazonaws.com'
         ECR_Repository = 'maven-cruntov'
