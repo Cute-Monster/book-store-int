@@ -31,7 +31,7 @@ pipeline {
                     aws_cluster = new Kubernetes_Cluster(steps, this)
                     sh('git log --format=format:%s -1 ${GIT_COMMIT} > commit_msg.txt')
                     Skip_Cluster = sh(
-                        script: """grep "${Skip_Cluster_Build_Text}" commit_msg.txt """,
+                        script: """grep "${Skip_Cluster_Build_Text}" commit_msg.txt""",
                         returnStatus: true
                     )
                     echo("""
@@ -63,12 +63,12 @@ pipeline {
             }
         }
 
-//             stage('Infrastructure build'){
-//                 when {
-//                     expression{ BRANCH_NAME == 'master' }
-//                 }
-//                 steps{
-//                     script{
+            stage('Infrastructure build'){
+                when {
+                    expression{ BRANCH_NAME == 'master' }
+                }
+                steps{
+                    script{
 //                         QUESTION = input(
 //                             id: 'Deploy_Kuber',
 //                             message: 'Run Deploy?',
@@ -77,12 +77,12 @@ pipeline {
 //                                 string(name: 'QUESTION', defaultValue: 'yes')
 //                             ]
 //                         )
-//                         if(QUESTION == 'yes'){
-//                             build 'cruntov_Kuber_AWS/master'
-//                         }
-//                     }
-//                 }
-//             }
+                        if(Skip_Cluster != 0 ){
+                            build 'cruntov_Kuber_AWS/master'
+                        }
+                    }
+                }
+            }
 
             stage('Kuber Deploy'){
                 when {
@@ -90,7 +90,7 @@ pipeline {
                 }
                 steps{
                     script{
-//                         if(QUESTION == 'yes'){
+//                         if(Skip_Cluster == 0){
                             aws_cluster.deploy_app()
 //                         }
                     }
