@@ -47,6 +47,19 @@ spec:
       targetPort: 8080
   externalIPs:
     -  3.239.33.116
-  externalName: mvn-clinic
   externalTrafficPolicy: Cluster
-  loadBalancerIP: 3.235.11.203
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: petclinic-ext-name
+spec:
+  selector:
+    app: petclinic
+  type: ExternalName
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  externalName: maven-clinic
