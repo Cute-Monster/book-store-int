@@ -48,6 +48,5 @@ spec:
   externalIPs:
     -  3.239.33.116
   externalName: mvn-clinic
-  ipFamily: IPv4
   externalTrafficPolicy: Cluster
   loadBalancerIP: 3.235.11.203
