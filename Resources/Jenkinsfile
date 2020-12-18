@@ -101,7 +101,7 @@ pipeline {
 }
 def cluster_build_check(){
        Skip_Cluster = sh(
-                script: 'git log --format=format:%s -1 ${this.pipeline.env.GIT_COMMIT} | grep "${this.pipeline.env.Skip_Cluster_Build_Text}" ',
+                script: 'git log --format=format:%s -1 ${GIT_COMMIT} | grep "${Skip_Cluster_Build_Text}" ',
                 returnStatus: true
         )
     }
