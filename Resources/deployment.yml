@@ -78,12 +78,12 @@ kind: Ingress
 metadata:
   name: petclinic-ingress
 spec:
-  backend:
-    resource:
-      kind: NodePort
-      name: petclinic-nodeport
-    serviceName: petclinic-nodeport
-    servicePort: 30718
+#  backend:
+#    resource:
+#      kind: NodePort
+#      name: petclinic-nodeport
+#    serviceName: petclinic-nodeport
+#    servicePort: 30718
   rules:
     - http:
         paths:
