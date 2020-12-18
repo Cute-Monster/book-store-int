@@ -9,6 +9,7 @@ pipeline {
     }
 
     environment {
+        Skip_Cluster_Build_Text = '\[skip\ cluster\]'
         Aws_Region = 'us-east-1'
         Docker_Registry = '315727832121.dkr.ecr.us-east-1.amazonaws.com'
         ECR_Repository = 'maven-cruntov'
@@ -28,6 +29,13 @@ pipeline {
                 script{
                     test_docker = new Docker_ECR(steps, this)
                     aws_cluster = new Kubernetes_Cluster(steps, this)
+                    Skip_Cluster = sh(
+                        script: """git log --format=format:%s -1 ${GIT_COMMIT} | grep ${Skip_Cluster_Build_Text} """,
+                        returnStatus: true
+                    )
+                    echo("""
+                        Skip_Cluster --> ${Skip_Cluster}
+                    """)
                 }
             }
         }
