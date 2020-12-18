@@ -62,4 +62,5 @@ spec:
     - port: 80
       protocol: TCP
       targetPort: 8080
+      nodePort: 30719
   externalName: maven-clinic
