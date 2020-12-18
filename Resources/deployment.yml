@@ -73,21 +73,23 @@ spec:
   - Ingress
 
 ---
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: petclinic-ingress
 spec:
-  defaultBackend:
-    service:
+  backend:
+    resource:
+      kind: NodePort
       name: petclinic-nodeport
-      port:
-        number: 30718
+    serviceName: petclinic-nodeport
+    servicePort: 30718
   rules:
     - http:
         paths:
           - backend:
-              service:
+              servicePort: 30718
+              serviceName: petclinic-nodeport
+              resource:
+                kind: NodePort
                 name: petclinic-nodeport
-                port:
-                  number: 30718
