@@ -45,22 +45,4 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 8080
-  externalIPs:
-    -  172.31.6.30
   externalTrafficPolicy: Cluster
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: petclinic-ext-name
-spec:
-  selector:
-    app: petclinic
-  type: ExternalName
-  ports:
-    - port: 80
-      protocol: TCP
-      targetPort: 8080
-      nodePort: 30719
-  externalName: maven-clinic
