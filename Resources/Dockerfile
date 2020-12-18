@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 COPY ./pom.xml ./pom.xml
 COPY ./src ./src
 RUN mvn dependency:go-offline -B
-RUN mvn -B package
+RUN mvn package
 
 
 
