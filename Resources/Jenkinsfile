@@ -29,8 +29,9 @@ pipeline {
                 script{
                     test_docker = new Docker_ECR(steps, this)
                     aws_cluster = new Kubernetes_Cluster(steps, this)
+                    sh('git log --format=format:%s -1 ${GIT_COMMIT} > commit_msg.txt')
                     Skip_Cluster = sh(
-                        script: "git log --format=format:%s -1 ${GIT_COMMIT} > commit_msg.txt && grep '${Skip_Cluster_Build_Text}' commit_msg.txt ",
+                        script: "grep '${Skip_Cluster_Build_Text}' commit_msg.txt ",
                         returnStatus: true
                     )
                     echo("""
