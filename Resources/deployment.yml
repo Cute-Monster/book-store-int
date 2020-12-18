@@ -45,13 +45,13 @@ kind: Service
 metadata:
   name: petclinic-nodeport
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - name: http
       protocol: TCP
       port: 80
       targetPort: 8080
-#      nodePort: 30718
+      nodePort: 30718
   externalIPs:
     - 3.239.33.116
   selector:
