@@ -8,7 +8,8 @@ WORKDIR /usr/src/app
 COPY ./pom.xml ./pom.xml
 COPY ./src ./src
 RUN mvn dependency:go-offline -B
-RUN mvn -B package -Dspring.profiles.active=mysql
+RUN mvn spring-boot:spring-boot:build-image -Dspring.profiles.active=mysql
+#RUN mvn -B package
 
 
 
