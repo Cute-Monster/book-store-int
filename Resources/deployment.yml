@@ -46,7 +46,7 @@ spec:
       port: 80
       targetPort: 8080
   externalIPs:
-    -  3.83.26.30
+    -  3.235.11.203
   externalTrafficPolicy: Cluster
 
 ---
