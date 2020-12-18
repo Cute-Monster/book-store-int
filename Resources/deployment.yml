@@ -1,10 +1,3 @@
-## Creating Namespace
-#---
-#apiVersion: v1
-#kind: Namespace
-#metadata:
-#  name: deployment
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -38,18 +31,23 @@ spec:
 
 
 # Creating ClusterIP Services
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: petclinic-nodeport
 spec:
-  type: NodePort
   selector:
     app: petclinic
+  type: NodePort
   ports:
     - nodePort: 30718
       protocol: TCP
-      port: 80812
+      port: 80
       targetPort: 8080
+  externalIPs:
+    -  3.239.33.116
+  externalName: mvn-clinic
+  ipFamily: IPv4
+  externalTrafficPolicy: Cluster
+  loadBalancerIP: 3.235.11.203
