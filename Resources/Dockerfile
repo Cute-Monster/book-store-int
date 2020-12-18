@@ -28,9 +28,9 @@ COPY --from=build /usr/src/app/target/*.jar ./SNAPSHOT.jar
 ARG SQL_USER
 ARG SQL_PASS
 ARG SQL_URL
-ENV MYSQL_USER=runtov
+ENV MYSQL_USER="runtov"
 ENV MYSQL_PASS="21AJjEQE9yToMrAa"
-ENV MYSQL_URL="jdbc:mysql://aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com:3306/runtov"
+ENV MYSQL_URL="jdbc:mysql:aurora://aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com:3306/runtov"
 RUN echo """$MYSQL_URL"""
 RUN echo '$SQL_URL'
 EXPOSE 8080
