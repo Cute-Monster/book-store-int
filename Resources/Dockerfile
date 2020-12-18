@@ -13,7 +13,7 @@ ENV MYSQL_URL=jdbc:mysql:aurora://aurora-cluster-internship.cluster-cpct4armoank
 RUN echo """$MYSQL_URL"""
 RUN mvn dependency:go-offline -B
 RUN mvn -B package
-RUN mvn spring-boot:repackage -Dspring.profiles.active=mysql
+RUN mvn spring-boot:repackage -Dspring.profiles.active=mysql /usr/src/app/target/*.jar
 
 
 
