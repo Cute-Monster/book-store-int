@@ -1,9 +1,7 @@
 #############################################
 #               Build & Test                #
 #############################################
-ARG SQL_USER
-ARG SQL_PASS
-ARG SQL_URL
+
 
 FROM maven:3.6.3-jdk-11-openj9  AS build
 WORKDIR /usr/src/app
@@ -26,10 +24,13 @@ RUN mvn test sonar:sonar \
 #############################################
 FROM openjdk:11.0.9.1-jre-buster
 COPY --from=build /usr/src/app/target/*.jar ./SNAPSHOT.jar
-ENV MYSQL_USER=${SQL_USER}
-ENV MYSQL_PASS=${SQL_PASS}
-ENV MYSQL_URL=${SQL_URL}
-RUN echo "$MYSQL_URL"
-RUN echo "ARGS --> $SQL_URL"
+ARG SQL_USER
+ARG SQL_PASS
+ARG SQL_URL
+ENV MYSQL_USER=$SQL_USER
+ENV MYSQL_PASS=$SQL_PASS
+ENV MYSQL_URL=$SQL_URL
+RUN echo $MYSQL_URL
+RUN echo $SQL_URL
 EXPOSE 8080
 CMD ["java", "-jar", "./SNAPSHOT.jar"]
