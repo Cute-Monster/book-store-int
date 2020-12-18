@@ -10,7 +10,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: petclinic-mvn
-#  namespace: deployment
   labels:
     app: petclinic
 spec:
@@ -22,7 +21,6 @@ spec:
     metadata:
       labels:
         app: petclinic
-#      namespace: deployment
     spec:
       containers:
         - image: "$Docker_Registry/$ECR_Repository:$GIT_COMMIT"
@@ -46,22 +44,30 @@ apiVersion: v1
 kind: Service
 metadata:
   name: petclinic-nodeport
-#  namespace: deployment
 spec:
-  externalTrafficPolicy: Cluster
-  externalIPs:
-    - 3.239.33.116
-  sessionAffinity: None
-  type: NodePort
-  selector:
-    app: petclinic
+  type: ClusterIP
   ports:
     - name: http
       protocol: TCP
       port: 80
       targetPort: 8080
-      nodePort: 30178
-status:
-  loadBalancer:
-    ingress:
-      - ip: 3.239.33.116
+      nodePort: 30718
+      appProtocol: TCP
+  externalIPs:
+    - 3.239.33.116
+  selector:
+    app: petclinic
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: petclinic-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - backend:
+              servicePort: 30718
+              serviceName: test
+            path: /maven-test
