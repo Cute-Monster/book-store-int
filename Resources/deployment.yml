@@ -52,7 +52,6 @@ spec:
       port: 80
       targetPort: 8080
       nodePort: 30718
-      appProtocol: TCP
   externalIPs:
     - 3.239.33.116
   selector:
