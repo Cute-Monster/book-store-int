@@ -41,5 +41,5 @@ EXPOSE 8080
 #ENTRYPOINT ["java -jar SNAPSHOT.jar -Dspring.profiles.active=mysql"]
 #CMD ["java", "-Dspring.profiles.active=mysql -jar SNAPSHOT.jar"]
 RUN ls -lha ./
-CMD ["java", "-jar", "SNAPSHOT.jar","-Dspring.profiles.active=mysql"]
+CMD ["java", "-Dspring.profiles.active=mysql", "-jar", "SNAPSHOT.jar"]
 
