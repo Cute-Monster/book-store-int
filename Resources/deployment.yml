@@ -20,6 +20,7 @@ spec:
           name: petclinic
           ports:
             - containerPort: 8080
+              hostPort: 8080
           livenessProbe:
             httpGet:
               scheme: HTTP
@@ -45,4 +46,4 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 8080
-  externalTrafficPolicy: Cluster
+#  externalTrafficPolicy: Cluster
