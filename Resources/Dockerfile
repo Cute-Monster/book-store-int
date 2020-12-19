@@ -38,5 +38,6 @@ ENV MYSQL_URL="jdbc:mysql:aurora://aurora-cluster-internship.cluster-cpct4armoan
 RUN echo """$MYSQL_URL"""
 RUN echo '$SQL_URL'
 EXPOSE 8080
-ENTRYPOINT ["java -jar SNAPSHOT.jar -Dspring.profiles.active=mysql"]
+#ENTRYPOINT ["java -jar SNAPSHOT.jar -Dspring.profiles.active=mysql"]
 #CMD ["java", "-Dspring.profiles.active=mysql -jar SNAPSHOT.jar"]
+CMD ['java', '-jar', 'SNAPSHOT.jar','-Dspring.profiles.active=mysql']
