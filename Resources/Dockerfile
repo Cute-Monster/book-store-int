@@ -11,8 +11,9 @@ COPY ./src ./src
 #ENV MYSQL_PASS=21AJjEQE9yToMrAa
 #ENV MYSQL_URL=jdbc:mysql:aurora://aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com:3306/runtov
 #RUN echo """$MYSQL_URL"""
-RUN mvn dependency:go-offline -B
-RUN mvn -Dspring-boot.run.profiles=mysql -DskipTests package
+#RUN mvn dependency:go-offline -B
+RUN ./mvnw package
+#RUN mvn -Dspring-boot.run.profiles=mysql -DskipTests package
 #RUN mvn spring-boot:repackage -Dspring.profiles.active=mysql /usr/src/app/target/*.jar
 
 
@@ -29,6 +30,7 @@ RUN mvn test sonar:sonar \
 #############################################
 FROM openjdk:11.0.9.1-jre-buster
 COPY --from=build /usr/src/app/target/*.jar ./SNAPSHOT.jar
+COPY --from=build /usr/src/app/mvnw ./mvnw
 ARG SQL_USER
 ARG SQL_PASS
 ARG SQL_URL
@@ -39,7 +41,7 @@ ARG SQL_URL
 #RUN echo '$SQL_URL'
 EXPOSE 8080
 #ENTRYPOINT ["java -jar SNAPSHOT.jar -Dspring.profiles.active=mysql"]
-#CMD ["java", "-Dspring.profiles.active=mysql -jar SNAPSHOT.jar"]
+CMD ["java", "-Dspring.profiles.active=mysql", ""]
 RUN ls -lha ./
-CMD ["java", "-Dspring-boot.run.profiles=mysql", "-jar", "SNAPSHOT.jar"]
+#CMD ["java", "-Dspring-boot.run.profiles=mysql", "-jar", "SNAPSHOT.jar"]
 
