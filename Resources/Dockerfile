@@ -12,7 +12,7 @@ COPY ./src ./src
 #ENV MYSQL_URL=jdbc:mysql:aurora://aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com:3306/runtov
 #RUN echo """$MYSQL_URL"""
 RUN mvn dependency:go-offline -B
-RUN mvn -B package
+RUN mvn -Dspring.profiles.active=mysql -B package
 #RUN mvn spring-boot:repackage -Dspring.profiles.active=mysql /usr/src/app/target/*.jar
 
 
