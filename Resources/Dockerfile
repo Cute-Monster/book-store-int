@@ -12,7 +12,7 @@ COPY ./src ./src
 #ENV MYSQL_URL=jdbc:mysql:aurora://aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com:3306/runtov
 #RUN echo """$MYSQL_URL"""
 #RUN mvn dependency:go-offline -B
-RUN ./mvnw package
+RUN ./mvnw package -DskipTests
 #RUN mvn -Dspring-boot.run.profiles=mysql -DskipTests package
 #RUN mvn spring-boot:repackage -Dspring.profiles.active=mysql /usr/src/app/target/*.jar
 
@@ -41,7 +41,7 @@ ARG SQL_URL
 #RUN echo '$SQL_URL'
 EXPOSE 8080
 #ENTRYPOINT ["java -jar SNAPSHOT.jar -Dspring.profiles.active=mysql"]
-CMD ["java", "-Dspring.profiles.active=mysql", ""]
-RUN ls -lha ./
+CMD ["java", "-Dspring.profiles.active=mysql", "-jar", "SNAPSHOT.jar"]
+#RUN ls -lha ./
 #CMD ["java", "-Dspring-boot.run.profiles=mysql", "-jar", "SNAPSHOT.jar"]
 
