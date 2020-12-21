@@ -60,6 +60,7 @@ kind: Service
 metadata:
   name: aurora
 spec:
+  type: ExternalName
   externalName: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com
 
 #---
