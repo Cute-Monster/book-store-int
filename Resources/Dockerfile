@@ -31,4 +31,5 @@ ARG SQL_USER
 ARG SQL_PASS
 ARG SQL_URL
 EXPOSE 8080
+EXPOSE 3306
 CMD ["java", "-jar", "-Dspring.profiles.active=mysql", "SNAPSHOT.jar"]

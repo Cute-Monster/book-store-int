@@ -27,6 +27,7 @@ spec:
               value: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com:3306/runtov
           ports:
             - containerPort: 8080
+            - containerPort: 3306
           livenessProbe:
             httpGet:
               scheme: HTTP
@@ -53,4 +54,21 @@ spec:
       port: 80
       targetPort: 8080
 
-#  externalTrafficPolicy: Cluster
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aurora
+spec:
+  externalName: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com
+
+#---
+#apiVersion: v1
+#kind: Endpoints
+#metadata:
+#  name: test-db
+#subsets:
+#  - ports:
+#      - port: 3306
+#  - addresses:
+#      - ip: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com
