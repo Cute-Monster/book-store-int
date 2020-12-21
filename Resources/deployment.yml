@@ -15,7 +15,7 @@ spec:
   clusterIP: None
   ports:
     - name: "mysql"
-      appProtocol: "TCP"
+      protocol: "TCP"
       port: 3306
       targetPort: 3306
       nodePort: 0
