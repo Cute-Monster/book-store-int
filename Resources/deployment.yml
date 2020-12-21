@@ -24,7 +24,7 @@ spec:
             - name: MYSQL_PASS
               value: 21AJjEQE9yToMrAa
             - name: MYSQL_URL
-              value: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com:3306/runtov
+              value: 172.31.6.246:3306/runtov
           ports:
             - containerPort: 8080
             - containerPort: 3306
@@ -58,18 +58,18 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: aurora
+  name: mysql
 spec:
-  type: ExternalName
-  externalName: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com
-
-#---
-#apiVersion: v1
-#kind: Endpoints
-#metadata:
-#  name: test-db
-#subsets:
-#  - ports:
-#      - port: 3306
-#  - addresses:
-#      - ip: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com
+  ports:
+    - port: 3306
+      targetPort: 3306
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: test-db
+subsets:
+  - addresses:
+      - ip: 172.31.6.246
+  - ports:
+      - port: 3306
