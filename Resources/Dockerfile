@@ -2,6 +2,7 @@
 #               Build & Test                #
 #############################################
 #FROM maven:3.6.3-jdk-11-openj9  AS build
+
 FROM maven:3.6.0-jdk-11-slim  AS build
 WORKDIR /usr/src/app
 COPY ./pom.xml ./pom.xml
