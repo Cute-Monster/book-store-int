@@ -18,6 +18,13 @@ spec:
       containers:
         - image: "$Docker_Registry/$ECR_Repository:$GIT_COMMIT"
           name: petclinic
+          env:
+            - name: MYSQL_USER
+              value: runtov
+            - name: MYSQL_PASSWORD
+              value: 21AJjEQE9yToMrAa
+            - name: MYSQL_URL
+              value: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com:3306/runtov
           ports:
             - containerPort: 8080
               hostPort: 8080
@@ -46,4 +53,5 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 8080
+
 #  externalTrafficPolicy: Cluster
