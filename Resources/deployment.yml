@@ -24,7 +24,7 @@ spec:
             - name: MYSQL_PASS
               value: 21AJjEQE9yToMrAa
             - name: MYSQL_URL
-              value: 172.31.6.246:3306/runtov
+              value: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com:3306/runtov
           ports:
             - containerPort: 8080
             - containerPort: 3306
@@ -61,15 +61,20 @@ metadata:
   name: mysql
 spec:
   ports:
-    - port: 3306
+    - name: mysql
+      port: 3306
       targetPort: 3306
+      nodePort: 0
+      protocol: TCP
+
 ---
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: test-db
+  name: mysql
 subsets:
   - addresses:
       - ip: 172.31.6.246
   - ports:
       - port: 3306
+
