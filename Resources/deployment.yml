@@ -54,11 +54,11 @@ metadata:
 spec:
   selector:
     app: petclinic
-  type: ClusterIP
+  type: NodePort
   ports:
     - nodePort: 30718
       protocol: TCP
-      port: 80
+      port: 8080
       targetPort: 8080
 
 
@@ -326,6 +326,7 @@ spec:
 #  namespace: default
 #spec:
 #  rules:
+#    - host:
 #    - http:
 #        paths:
 #          - path: /
