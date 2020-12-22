@@ -6,33 +6,7 @@
 #spec:
 #  type: ExternalName
 #  externalName: aurora-cluster-internship.cluster-cpct4armoank.us-east-1.rds.amazonaws.com
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: external-mysql
-spec:
-  clusterIP: None
-  ports:
-    - name: mysql
-      protocol: TCP
-      port: 3306
-      targetPort: 3306
-      nodePort: 0
-  externalTrafficPolicy: Local
-  selector: {}
 
----
-apiVersion: v1
-kind: Endpoints
-metadata:
-  name: external-mysql
-subsets:
-  - addresses:
-      - ip: 172.31.6.246
-  - ports:
-      - port: 3306
-        name: mysql
 
 ---
 apiVersion: apps/v1
@@ -75,7 +49,33 @@ spec:
         - name: "$Kuber_Secret"
 
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-mysql
+spec:
+  clusterIP: None
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+      nodePort: 0
+  externalTrafficPolicy: Local
+  selector: {}
 
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: external-mysql
+subsets:
+  - addresses:
+      - ip: 172.31.6.246
+  - ports:
+      - port: 3306
+        name: mysql
 # Creating ClusterIP Services
 ---
 apiVersion: v1
