@@ -317,18 +317,18 @@ spec:
   selector:
     app: nginx-ingress
 
-# IngressRule
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: ingress-rules
-  namespace: default
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /
-            backend:
-              serviceName: petclinic-nodeport
-              servicePort: 80
+## IngressRule
+#---
+#apiVersion: networking.k8s.io/v1beta1
+#kind: Ingress
+#metadata:
+#  name: ingress-rules
+#  namespace: default
+#spec:
+#  rules:
+#    - http:
+#        paths:
+#          - path: /
+#            backend:
+#              serviceName: petclinic-nodeport
+#              servicePort: 80
