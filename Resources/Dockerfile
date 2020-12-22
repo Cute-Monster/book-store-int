@@ -1,17 +1,17 @@
 #############################################
-#               Build & Test                #
+#                  Build                    #
 #############################################
-#FROM maven:3.6.3-jdk-11-openj9  AS build
-
 FROM maven:3.6.0-jdk-11-slim  AS build
 WORKDIR /usr/src/app
 COPY ./pom.xml ./pom.xml
 COPY ./src ./src
-#RUN mvn dependency:go-offline
-RUN mvn clean install
+RUN mvn dependency:go-offline
 RUN mvn package -DskipTests
 
 
+#############################################
+#                 Scanner                   #
+#############################################
 FROM build as scanner
 RUN mvn test sonar:sonar \
     -Dsonar.projectKey=Maven-CR-CI \
@@ -24,12 +24,8 @@ RUN mvn test sonar:sonar \
 #############################################
 #                  Run                      #
 #############################################
-#FROM openjdk:11.0.9.1-jre-buster
 FROM java:8-jdk-alpine
 COPY --from=build /usr/src/app/target/*.jar ./SNAPSHOT.jar
-ARG SQL_USER
-ARG SQL_PASS
-ARG SQL_URL
 EXPOSE 8080
-EXPOSE 3306
+#EXPOSE 3306
 CMD ["java", "-jar", "-Dspring.profiles.active=mysql", "SNAPSHOT.jar"]
