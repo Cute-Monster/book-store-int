@@ -68,8 +68,10 @@ spec:
   rules:
     - http:
         paths:
-          - backend:
-              serviceName: petclinic-nodeport
-              servicePort: 80
-              path: /petclinic
+          - path: /petclinic(/|$)(.*)
+            backend:
+              service:
+                name: petclinic-nodeport
+                port:
+                  number: 80
     - host: ec2-3-237-78-242.compute-1.amazonaws.com
