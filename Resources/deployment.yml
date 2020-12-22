@@ -59,7 +59,7 @@ spec:
             - name: MYSQL_PASS
               value: 21AJjEQE9yToMrAa
             - name: MYSQL_URL
-              value: 172.31.6.246:3306/runtov
+              value: mysql:3306/runtov
           ports:
             - containerPort: 8080
             - containerPort: 3306
