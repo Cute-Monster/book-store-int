@@ -48,28 +48,9 @@ metadata:
 spec:
   selector:
     app: petclinic
-  type: ClusterIP
+  type: NodePort
   ports:
     - nodePort: 30718
       protocol: TCP
       port: 80
       targetPort: 8080
-
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: petclinic-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /petclinic(/|$)(.*)
-            backend:
-              serviceName: petclinic-nodeport
-              servicePort: 80
-    - host: ec2-3-237-78-242.compute-1.amazonaws.com
