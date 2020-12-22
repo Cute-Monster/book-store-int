@@ -61,8 +61,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: petclinic-loadb
-#  annotations:
-#    kubernetes.io/ingress.class: alb
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: 172.31.6.31
 spec:
   selector:
     app: petclinic
@@ -73,18 +74,18 @@ spec:
       protocol: TCP
 
 
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: petclinic-ingress
-  annotations:
-    kubernetes.io/ingress.class: alb
-spec:
-  rules:
-    - http:
-        paths:
-          - path: /
-            backend:
-              serviceName: petclinic-nodeport
-              servicePort: 30718
+#---
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: petclinic-ingress
+#  annotations:
+#    kubernetes.io/ingress.class: alb
+#spec:
+#  rules:
+#    - http:
+#        paths:
+#          - path: /
+#            backend:
+#              serviceName: petclinic-nodeport
+#              servicePort: 30718
