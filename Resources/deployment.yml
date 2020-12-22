@@ -48,7 +48,7 @@ metadata:
 spec:
   selector:
     app: petclinic
-  type: NodePort
+  type: ClusterIP
   ports:
     - nodePort: 30718
       protocol: TCP
