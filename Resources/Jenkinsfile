@@ -9,13 +9,14 @@ pipeline {
     }
 
     environment {
-        Skip_Cluster_Build_Text = 'skip_cluster_build'
+        Cluster_Build_Text = 'cluster_build'
         Aws_Region = 'us-east-1'
         Docker_Registry = '315727832121.dkr.ecr.us-east-1.amazonaws.com'
         ECR_Repository = 'maven-cruntov'
         Docker_Creds = 'CR_AWS_ECR'
         Kube_Config = 'CR_Kube_Config'
         Kuber_Secret = 'ecr-cruntov-creds'
+        Kuber_Namespace = 'petclinic'
         SQL_USER = credentials('Cruntov_mvn_SQL_USER')
         SQL_PASS = credentials('Cruntov_mvn_SQL_PASS')
         SQL_URL = credentials('Cruntov_mvn_SQL_URL')
@@ -62,15 +63,7 @@ pipeline {
                 }
                 steps{
                     script{
-//                         QUESTION = input(
-//                             id: 'Deploy_Kuber',
-//                             message: 'Run Deploy?',
-//                             ok: 'yes',
-//                             parameters: [
-//                                 string(name: 'QUESTION', defaultValue: 'yes')
-//                             ]
-//                         )
-                        if(Skip_Cluster != 0 ){
+                        if(Build_Cluster == 0 ){
                             build 'cruntov_Kuber_AWS/master'
                         }
                     }
@@ -83,9 +76,7 @@ pipeline {
                 }
                 steps{
                     script{
-//                         if(Skip_Cluster == 0){
-                            aws_cluster.deploy_app()
-//                         }
+                        aws_cluster.deploy_app()
                     }
                 }
             }
@@ -99,15 +90,16 @@ pipeline {
         }
     }
 }
+
 def cluster_build_check(){
-       Skip_Cluster = sh(
-                script: 'git log --format=format:%s -1 ${GIT_COMMIT} | grep "${Skip_Cluster_Build_Text}" ',
-                returnStatus: true
-        )
-    }
+    Build_Cluster = sh(
+        script: 'git log --format=format:%s -1 ${GIT_COMMIT} | egrep "\ ${Cluster_Build_Text}" ',
+        returnStatus: true
+    )
+}
 def Workspace_Cleaning(){
-        cleanWs()
-        echo("""
-             Workspace Cleaned
-        """)
-    }
+    cleanWs()
+    echo("""
+        Workspace Cleaned
+    """)
+}
