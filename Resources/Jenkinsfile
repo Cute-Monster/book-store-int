@@ -97,6 +97,7 @@ def cluster_build_check(){
         returnStatus: true
     )
 }
+
 def Workspace_Cleaning(){
     cleanWs()
     echo("""
