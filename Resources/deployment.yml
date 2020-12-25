@@ -1,11 +1,6 @@
 ###########################################
 #             App Deployment              #
 ###########################################
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: $Kuber_Namespace
 
 # PetClinic App
 ---

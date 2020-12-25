@@ -1,0 +1,8 @@
+###########################################
+#           Namespace Deployment          #
+###########################################
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: $Kuber_Namespace

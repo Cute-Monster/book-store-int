@@ -62,7 +62,7 @@ pipeline {
                 }
                 steps{
                     script{
-                        if(Build_Cluster == 0 ){
+                        if( Build_Cluster == 0 ){
                             build 'cruntov_Kuber_AWS/master'
                         }
                     }
