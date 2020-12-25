@@ -27,5 +27,4 @@ RUN mvn test sonar:sonar \
 FROM java:8-jdk-alpine
 COPY --from=build /usr/src/app/target/*.jar ./SNAPSHOT.jar
 EXPOSE 8080
-#EXPOSE 3306
 CMD ["java", "-jar", "-Dspring.profiles.active=mysql", "SNAPSHOT.jar"]
