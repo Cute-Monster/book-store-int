@@ -93,7 +93,7 @@ pipeline {
 
 def cluster_build_check(){
     Build_Cluster = sh(
-        script: """git log --format=format:%s -1 ${GIT_COMMIT} | grep -E "\s${Cluster_Build_Text}" """,
+        script: """git log --format=format:%s -1 ${GIT_COMMIT} | grep -e '*\ ${Cluster_Build_Text}' """,
         returnStatus: true
     )
 }
