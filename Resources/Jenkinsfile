@@ -16,7 +16,7 @@ pipeline {
         Docker_Creds = 'CR_AWS_ECR'
         Kube_Config = 'CR_Kube_Config'
         Kuber_Secret = 'ecr-cruntov-creds'
-        Kuber_Namespace = 'default'
+        Kuber_Namespace = 'petclinic'
         SQL_USER = credentials('Cruntov_mvn_SQL_USER')
         SQL_PASS = credentials('Cruntov_mvn_SQL_PASS')
         SQL_URL = credentials('Cruntov_mvn_SQL_URL')
