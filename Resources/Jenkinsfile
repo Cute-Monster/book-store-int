@@ -20,7 +20,7 @@ pipeline {
         SQL_USER = credentials('Cruntov_mvn_SQL_USER')
         SQL_PASS = credentials('Cruntov_mvn_SQL_PASS')
         SQL_URL = credentials('Cruntov_mvn_SQL_URL')
-
+        cluster_build_check()
 
     }
 
@@ -30,7 +30,7 @@ pipeline {
                 script{
                     test_docker = new Docker_ECR(steps, this)
                     aws_cluster = new Kubernetes_Cluster(steps, this)
-                    cluster_build_check()
+//                     cluster_build_check()
                 }
             }
         }
@@ -93,7 +93,7 @@ pipeline {
 
 def cluster_build_check(){
     Build_Cluster = sh(
-        script: """git log --format=format:%s -1 ${GIT_COMMIT} | egrep "\s${Cluster_Build_Text}" """,
+        script: """git log --format=format:%s -1 ${GIT_COMMIT} | grep -E "\s${Cluster_Build_Text}" """,
         returnStatus: true
     )
 }
