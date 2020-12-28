@@ -1,6 +1,8 @@
 @Library('cr_shared_library@master')
 
-import org.cruntov.jenkins.components.*
+import org.cruntov.jenkins.components.Docker_ECR
+import org.cruntov.jenkins.components.Kubernetes_Cluster
+
 
 
 pipeline {
@@ -16,11 +18,9 @@ pipeline {
         Docker_Creds = 'CR_AWS_ECR'
         Kube_Config = 'CR_Kube_Config'
         Kuber_Secret = 'ecr-cruntov-creds'
-        Kuber_Namespace = 'petclinic'
         SQL_USER = credentials('Cruntov_mvn_SQL_USER')
         SQL_PASS = credentials('Cruntov_mvn_SQL_PASS')
         SQL_URL = credentials('Cruntov_mvn_SQL_URL')
-
     }
 
     stages {
@@ -29,7 +29,8 @@ pipeline {
                 script{
                     test_docker = new Docker_ECR(steps, this)
                     aws_cluster = new Kubernetes_Cluster(steps, this)
-                    cluster_build_check()
+                    this.cluster_build_check()
+                    kuber_namespace_defenition()
                 }
             }
         }
@@ -56,32 +57,29 @@ pipeline {
             }
         }
 
-            stage('Infrastructure build'){
-                when {
-                    expression{ BRANCH_NAME == 'master' }
-                }
-                steps{
-                    script{
-                        if( Build_Cluster == 0 ){
-                            build 'cruntov_Kuber_AWS/master'
-                        }
+        stage('Infrastructure build'){
+            when {
+                expression{ BRANCH_NAME == 'master' }
+            }
+            steps{
+                script{
+                    if( Build_Cluster == 0 ){
+                        build 'cruntov_Kuber_AWS/master'
                     }
                 }
             }
+        }
 
-            stage('Kuber Deploy'){
-                when {
-                    expression{ BRANCH_NAME == 'master' }
-                }
-                steps{
-                    script{
-                        aws_cluster.deploy_app()
-                    }
+        stage('Kuber Deploy'){
+            when {
+                expression{ BRANCH_NAME == 'master' }
+            }
+            steps{
+                script{
+                    aws_cluster.deploy_app()
                 }
             }
-
-
-
+        }
     }
     post{
         always{
@@ -96,6 +94,15 @@ def cluster_build_check(){
         returnStatus: true
     )
 }
+
+def kuber_namespace_defenition(){
+    if( BRANCH_NAME == 'master' ){
+        Kuber_Namespace = 'prod-dotnet'
+    }else{
+        Kuber_Namespace = 'dev-dotnet'
+    }
+}
+
 
 def Workspace_Cleaning(){
     cleanWs()
