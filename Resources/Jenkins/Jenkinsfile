@@ -22,9 +22,11 @@ pipeline {
         Docker_Creds = 'CR_AWS_ECR'
         Kube_Config = 'CR_Kube_Config'
         Kuber_Secret = 'ecr-cruntov-creds'
+        Kuber_Namespace = 'prod-petclinic'
         SQL_USER = credentials('Cruntov_mvn_SQL_USER')
         SQL_PASS = credentials('Cruntov_mvn_SQL_PASS')
         SQL_URL = credentials('Cruntov_mvn_SQL_URL')
+
     }
 
     stages {
@@ -101,9 +103,9 @@ def cluster_build_check(){
 
 def kuber_namespace_defenition(){
     if( BRANCH_NAME == 'master' ){
-        Kuber_Namespace = 'prod-dotnet'
+        Kuber_Namespace = 'prod-petclinic'
     }else{
-        Kuber_Namespace = 'dev-dotnet'
+        Kuber_Namespace = 'dev-petclinic'
     }
 }
 
