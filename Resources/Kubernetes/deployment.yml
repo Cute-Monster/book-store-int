@@ -50,6 +50,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    alb.ingress.kubernetes.io/target-type: i-06eb145ccd09cfed8
   name: petclinic-nodeport
   namespace: $Kuber_Namespace
 spec:
