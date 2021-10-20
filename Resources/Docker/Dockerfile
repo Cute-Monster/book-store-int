@@ -13,10 +13,14 @@ RUN mvn package
 #                 Scanner                   #
 #############################################
 FROM build as scanner
+
+ARG SonarProjectKey
+ARG SonarHost
+ARG SonarLogin
 RUN mvn test sonar:sonar \
-    -Dsonar.projectKey=Maven-CR-CI \
-    -Dsonar.host.url=https://sonarqube.trydevops.com \
-    -Dsonar.login=62f01a67de1b8869ed7f0f1f46df7c159efca3f7 \
+    -Dsonar.projectKey=$SonarProjectKey \
+    -Dsonar.host.url=$SonarHost \
+    -Dsonar.login=$SonarLogin \
     -Dsonar.projectDescription='RC MAVEN TEST' \
     -Dsonar.projectName='RC Pet Clinic Maven'
 

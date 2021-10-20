@@ -7,7 +7,7 @@ import org.cruntov.jenkins.components.Kubernetes_Cluster
 
 pipeline {
     agent {
-        label 'Slave'
+        label 'JavaSlave'
     }
 
     options {
@@ -15,9 +15,6 @@ pipeline {
     }
 
     environment {
-        Cluster_Build_Text = 'cluster_build'
-        Aws_Region = 'us-east-1'
-        Docker_Registry = '315727832121.dkr.ecr.us-east-1.amazonaws.com'
         ECR_Repository = 'maven-cruntov'
         Docker_Creds = 'CR_AWS_ECR'
         Kube_Config = 'CR_Kube_Config'
@@ -26,6 +23,9 @@ pipeline {
         SQL_USER = credentials('Cruntov_mvn_SQL_USER')
         SQL_PASS = credentials('Cruntov_mvn_SQL_PASS')
         SQL_URL = credentials('Cruntov_mvn_SQL_URL')
+        SonarProjectKey = credentials('Cruntov_mvn_SonarProjectKey')
+        SonarProjectLogin = credentials('Cruntov_mvn_SonarProjectLogin')
+
 
     }
 
@@ -33,6 +33,7 @@ pipeline {
         stage('Preparing'){
             steps{
                 script{
+                    base_environment()
                     test_docker = new Docker_ECR(steps, this)
                     aws_cluster = new Kubernetes_Cluster(steps, this)
                     cluster_build_check()
